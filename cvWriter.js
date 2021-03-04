@@ -32,6 +32,7 @@ cv.push(
 const stylingOptions = {
   size: 22,
   style: 'wellSpaced',
+  font: 'Arial',
 };
 //GENERATE .docx
 const createDocxParagraph = (text, options) => {
@@ -48,6 +49,7 @@ doc.addSection({
     createDocxParagraph(role, { ...stylingOptions, break: 1 }),
     createDocxParagraph(closer, { ...stylingOptions, break: 1 }),
     createDocxParagraph('Best Wishes,', { ...stylingOptions, break: 1 }),
+    createDocxParagraph(options.name, stylingOptions),
     createDocxParagraph(contactInfo, stylingOptions),
   ],
 });
