@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "commander": "^7.1.0",
+    "docx": "^5.5.0",
     "yargs": "^16.2.0"
   }
 }
