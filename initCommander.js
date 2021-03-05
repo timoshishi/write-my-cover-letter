@@ -27,6 +27,8 @@ program
   )
   .option('-c, --contact <string>', 'enter the name of a contact')
   .option('-n, --name <string>', 'add your name', 'Tim Forrest')
+  .option('-dx, --docx', 'write your cv in .docx format')
+  .option('-tx, --txt', 'write your cv in .txt format')
   .option(
     '-p, --phone <string>',
     'add your phone number in the format you wanted it presented',
