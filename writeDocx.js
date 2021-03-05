@@ -2,7 +2,7 @@ const fs = require('fs');
 const { Document, Packer, Paragraph, TextRun } = require('docx');
 const doc = new Document();
 
-const stylingOptions = {
+const defaultStyles = {
   size: 22,
   style: 'wellSpaced',
   font: 'Arial',
@@ -24,17 +24,18 @@ const writeDocx = (options) => {
     toWhomItMayConcern,
     name,
   } = options;
+
   doc.addSection({
     properties: {},
     children: [
-      createDocxParagraph(toWhomItMayConcern, stylingOptions),
-      createDocxParagraph(introPara, { ...stylingOptions, break: 1 }),
-      createDocxParagraph(aboutMe, { ...stylingOptions, break: 1 }),
-      createDocxParagraph(role, { ...stylingOptions, break: 1 }),
-      createDocxParagraph(closer, { ...stylingOptions, break: 1 }),
-      createDocxParagraph('Best Wishes,', { ...stylingOptions, break: 1 }),
-      createDocxParagraph(name, stylingOptions),
-      createDocxParagraph(contactInfo, stylingOptions),
+      createDocxParagraph(toWhomItMayConcern, defaultStyles),
+      createDocxParagraph(introPara, { ...defaultStyles }),
+      createDocxParagraph(aboutMe, { ...defaultStyles, break: 1 }),
+      createDocxParagraph(role, { ...defaultStyles, break: 1 }),
+      createDocxParagraph(closer, { ...defaultStyles, break: 1 }),
+      createDocxParagraph('Best Wishes,', { ...defaultStyles, break: 1 }),
+      createDocxParagraph(name, defaultStyles),
+      createDocxParagraph(contactInfo, defaultStyles),
     ],
   });
 
