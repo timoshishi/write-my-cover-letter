@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const initCommander = require('./initCommander.js');
 const { generateParagraphs } = require('./letterBody.js');
 const writeTxt = require('./writeTxt.js');

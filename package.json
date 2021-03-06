@@ -1,8 +1,11 @@
 {
-  "name": "cvWriter",
+  "name": "write-my-cv",
   "version": "1.0.0",
   "description": "",
-  "main": "cvWriter.js",
+  "main": "index.js",
+  "bin": {
+    "write-my-cv": "index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
