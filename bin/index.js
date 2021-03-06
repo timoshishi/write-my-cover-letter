@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const initCommander = require('./initCommander.js');
-const { generateParagraphs } = require('./letterBody.js');
-const writeTxt = require('./writeTxt.js');
-const writeDocx = require('./writeDocx');
+const initCommander = require('../lib/initCommander.js');
+const { generateParagraphs } = require('../lib/letterBody.js');
+const writeTxt = require('../lib/writeTxt.js');
+const writeDocx = require('../lib/writeDocx');
 
 const options = initCommander();
 const paras = generateParagraphs(options);
