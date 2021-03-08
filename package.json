@@ -1,14 +1,14 @@
 {
-  "name": "write-my-cv",
+  "name": "write-my-cover-letter",
   "version": "1.0.0",
   "description": "",
   "main": "./bin/index.js",
   "bin": {
-    "write-my-cv": "./bin/index.js"
+    "cover-letter": "./bin/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "write-my-cv": "./bin/index.js"
+    "cover-letter": "./bin/index.js"
   },
   "keywords": [],
   "author": "",

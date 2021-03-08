@@ -1,4 +1,4 @@
-# write-my-cv
+# write-my-cover-letter
 
 ### Currently a work in progress
 
@@ -8,8 +8,7 @@
 2. Installation
 
 - Install globally with `npm i -g ./` in base directory of project
-- Run local-only with `npm run write-my-cv`
+- Run local-only with `npm run cover-letter`
 
-3.  Check help and options by running write-my-cv -h
 4.  Will write to PWD if installed globally otherwise writes to project base
     dir.
