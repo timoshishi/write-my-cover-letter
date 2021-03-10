@@ -6,7 +6,7 @@ const options = {
   position: 'FULL STACK',
   role: 'frontend',
   intro: 'Here is a thing that I have been doing lately',
-  contact: 'yello',
+  contact: 'hello',
 };
 test('it should return an object', () => {
   const paras = generateParagraphs(options);
@@ -36,4 +36,23 @@ test('if a contact is not provided toWhomItMayConcern should include To the wond
 test('it should return six key value pairs', () => {
   const keys = Object.keys(generateParagraphs(options));
   expect(keys.length).toBe(7);
+});
+
+test('all values returned should have length', () => {
+  const allHaveLength = Object.values(generateParagraphs(options)).every(
+    (value) => value.length > 0
+  );
+  expect(allHaveLength).toBe(true);
+});
+
+test('no values should have no length', () => {
+  const someHaveNoLength = Object.values(generateParagraphs(options)).some(
+    (value) => value.length === 0
+  );
+  expect(someHaveNoLength).toBe(false);
+});
+
+test('name should have a length', () => {
+  const { name } = generateParagraphs(options);
+  expect(name).toBeDefined();
 });
