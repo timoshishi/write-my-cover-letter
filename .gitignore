@@ -2,3 +2,4 @@ node_modules/
 *.txt
 *.docx*
 *.pdf
+coverage/
