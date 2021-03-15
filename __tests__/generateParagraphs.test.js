@@ -1,4 +1,5 @@
 const generateParagraphs = require('../lib/generateParagraphs');
+const readPersonalization = require('../lib/readPersonalization');
 
 const options = {
   industry: 'generic',
@@ -7,9 +8,11 @@ const options = {
   role: 'frontend',
   intro: 'Here is a thing that I have been doing lately',
   contact: 'hello',
+  personalData: readPersonalization(),
 };
 test('it should return an object', () => {
   const paras = generateParagraphs(options);
+  console.log({ paras });
   expect(typeof paras).toBe('object');
   expect(paras).toBeDefined();
 });
@@ -27,6 +30,7 @@ test('if a contact is not provided toWhomItMayConcern should include To the wond
     role: 'frontend',
     intro: 'Here is a thing that I have been doing lately',
     contact: undefined,
+    personalData: readPersonalization(),
   };
   const paras = generateParagraphs(options);
   const regex = new RegExp(`To the wonderful folks at ${options.company}`);

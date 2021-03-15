@@ -3,7 +3,7 @@ const writeDocx = require('../lib/writeDocs/writeDocx');
 const path = require('path');
 const fs = require('fs');
 const writePDF = require('../lib/writeDocs/writePDF');
-
+const readPersonalization = require('../lib/readPersonalization');
 const options = {
   industry: 'generic',
   company: 'RED ALERT',
@@ -11,6 +11,7 @@ const options = {
   role: 'frontend',
   intro: 'Here is a thing that I have been doing lately',
   contact: 'hello',
+  personalData: readPersonalization(),
 };
 const paras = generateParagraphs(options);
 
