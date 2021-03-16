@@ -19,9 +19,7 @@ const paras = generateParagraphs({
 });
 
 const fileName = `${paras.name.split(' ').join('_')}_cover_letter.docx`;
-// afterEach(() => {
 
-// })
 afterEach(() => {
   fs.unlinkSync(path.resolve(__dirname, `${fileName}`));
 });

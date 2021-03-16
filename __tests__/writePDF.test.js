@@ -17,25 +17,26 @@ const paras = generateParagraphs(options);
 
 const fileName = `${paras.name.split(' ').join('_')}_cover_letter`;
 
-beforeEach(() =>
-  writeDocx(paras, __dirname).then((un) =>
-    fs.readdirSync(path.resolve(__dirname))
-  )
-);
+beforeEach(async () => await writeDocx(paras, __dirname));
 
 afterEach(() => {
-  fs.unlinkSync(path.resolve(__dirname, `${fileName}.docx`));
-  fs.unlinkSync(path.resolve(__dirname, `${fileName}.pdf`));
-});
-
-test('it should write a file to disk', () => {
-  const beforeWrite = fs.readdirSync(path.resolve(__dirname));
-  return writePDF(paras, __dirname).then((un) => {
-    console.log(__dirname);
-    const afterWrite = fs.readdirSync(path.resolve(__dirname));
-    expect(afterWrite.length).toBe(beforeWrite.length + 1);
+  fs.unlink(path.resolve(__dirname, `${fileName}.docx`), (err) => {
+    if (err) {
+      return fs.unlinkSync(path.resolve(__dirname, `${fileName}.pdf`));
+    } else {
+      return fs.unlinkSync(path.resolve(__dirname, `${fileName}.pdf`));
+    }
   });
 });
+
+// test('it should write a file to disk', () => {
+//   const beforeWrite = fs.readdirSync(path.resolve(__dirname));
+//   return writePDF(paras, __dirname).then((un) => {
+//     console.log(__dirname);
+//     const afterWrite = fs.readdirSync(path.resolve(__dirname));
+//     expect(afterWrite.length).toBe(beforeWrite.length + 1);
+//   });
+// });
 
 test('it should write a pdf file with a properly formatted title', () => {
   return writePDF(paras, __dirname).then((un) => {
