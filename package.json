@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "jest",
-    "cover-letter": "./bin/index.js"
+    "cover-letter": "./bin/index.js",
+    "debug": "ndb ./bin/index.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,7 @@
     "open": "^8.0.2"
   },
   "devDependencies": {
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "ndb": "^1.1.5"
   }
 }
