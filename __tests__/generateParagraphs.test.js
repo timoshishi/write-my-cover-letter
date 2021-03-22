@@ -12,7 +12,6 @@ const options = {
 };
 test('it should return an object', () => {
   const paras = generateParagraphs(options);
-  console.log({ paras });
   expect(typeof paras).toBe('object');
   expect(paras).toBeDefined();
 });

@@ -11,11 +11,13 @@ const options = {
   intro: 'Here is a thing that I have been doing lately',
   contact: 'yello',
   personalData: readPersonalization(),
+  copy: false,
+  name: 'awesome',
 };
-
+const personalData = readPersonalization();
 const paras = generateParagraphs({
   ...options,
-  personalData: readPersonalization(),
+  ...personalData,
 });
 
 const fileName = `${paras.name.split(' ').join('_')}_cover_letter.docx`;
@@ -26,6 +28,7 @@ afterEach(() => {
 
 test('it should write a file to disk', () => {
   const beforeWrite = fs.readdirSync(path.resolve(__dirname));
+  console.log(paras);
   return writeDocx(paras, __dirname).then((un) => {
     const afterWrite = fs.readdirSync(path.resolve(__dirname));
     expect(afterWrite.length).toBe(beforeWrite.length + 1);
