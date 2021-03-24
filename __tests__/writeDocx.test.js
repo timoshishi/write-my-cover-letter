@@ -16,9 +16,7 @@ const options = {
 };
 const personalData = readPersonalization();
 const paras = generateParagraphs({
-  ...options,
-  ...personalData,
-});
+  ...options);
 
 const fileName = `${paras.name.split(' ').join('_')}_cover_letter.docx`;
 
