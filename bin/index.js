@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-const initInquirer = require('../lib/initInquirer.js');
+const initInquirer = require('../src/initInquirer.js');
 initInquirer();

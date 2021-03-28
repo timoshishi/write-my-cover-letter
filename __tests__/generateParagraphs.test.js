@@ -1,5 +1,5 @@
-const generateParagraphs = require('../lib/generateParagraphs');
-const readPersonalization = require('../lib/readPersonalization');
+const generateParagraphs = require('../src/generateParagraphs');
+const readPersonalization = require('../src/readPersonalization');
 
 const options = {
   industry: 'generic',

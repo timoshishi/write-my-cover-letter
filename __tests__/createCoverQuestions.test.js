@@ -1,5 +1,5 @@
-const createCoverQuestions = require('../lib/createCoverQuestions');
-const readPersonalization = require('../lib/readPersonalization');
+const createCoverQuestions = require('../src/createCoverQuestions');
+const readPersonalization = require('../src/readPersonalization');
 
 const personalData = {
   roles: { brasco: 'donnie', vito: 'genovese' },
