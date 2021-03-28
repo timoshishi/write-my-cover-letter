@@ -1,8 +1,8 @@
-const generateParagraphs = require('../lib/generateParagraphs');
-const writeDocx = require('../lib/writeDocs/writeDocx');
+const generateParagraphs = require('../src/generateParagraphs');
+const writeDocx = require('../src/writeDocs/writeDocx');
 const path = require('path');
 const fs = require('fs');
-const readPersonalization = require('../lib/readPersonalization');
+const readPersonalization = require('../src/readPersonalization');
 const options = {
   industry: 'generic',
   company: 'RED ALERT',
@@ -13,10 +13,12 @@ const options = {
   personalData: readPersonalization(),
   copy: false,
   name: 'awesome',
+  copy: false,
 };
 const personalData = readPersonalization();
 const paras = generateParagraphs({
-  ...options);
+  ...options,
+});
 
 const fileName = `${paras.name.split(' ').join('_')}_cover_letter.docx`;
 

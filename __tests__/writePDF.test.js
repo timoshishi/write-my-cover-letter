@@ -1,9 +1,9 @@
-const generateParagraphs = require('../lib/generateParagraphs');
-const writeDocx = require('../lib/writeDocs/writeDocx');
+const generateParagraphs = require('../src/generateParagraphs');
+const writeDocx = require('../src/writeDocs/writeDocx');
 const path = require('path');
 const fs = require('fs');
-const writePDF = require('../lib/writeDocs/writePDF');
-const readPersonalization = require('../lib/readPersonalization');
+const writePDF = require('../src/writeDocs/writePDF');
+const readPersonalization = require('../src/readPersonalization');
 const options = {
   industry: 'generic',
   company: 'RED ALERT',
@@ -28,15 +28,6 @@ afterEach(() => {
     }
   });
 });
-
-// test('it should write a file to disk', () => {
-//   const beforeWrite = fs.readdirSync(path.resolve(__dirname));
-//   return writePDF(paras, __dirname).then((un) => {
-//     console.log(__dirname);
-//     const afterWrite = fs.readdirSync(path.resolve(__dirname));
-//     expect(afterWrite.length).toBe(beforeWrite.length + 1);
-//   });
-// });
 
 test('it should write a pdf file with a properly formatted title', () => {
   return writePDF(paras, __dirname).then((un) => {

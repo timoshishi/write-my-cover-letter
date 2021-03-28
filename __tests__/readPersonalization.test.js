@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const readPersonalization = require('../lib/readPersonalization');
+const readPersonalization = require('../src/readPersonalization');
 
 test('It should return one object per file in cvPersonalization', () => {
   const fileNames = fs.readdirSync(

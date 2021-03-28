@@ -4,11 +4,11 @@
   "description": "",
   "main": "./bin/index.js",
   "bin": {
-    "cover-letter": "./bin/index.js"
+    "coverletter": "./bin/index.js"
   },
   "scripts": {
     "test": "jest",
-    "cover-letter": "./bin/index.js",
+    "coverletter": "./bin/index.js",
     "debug": "ndb ./bin/index.js"
   },
   "keywords": [],
