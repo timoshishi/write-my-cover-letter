@@ -9,11 +9,11 @@
 ### Installation
 
 - Global: `npm i -g ./` in base directory of project
-  - Run with `cover-letter`
+  - Run with `coverletter`
   - Writes to PWD
 - Local: `npm i` in base directory of the project
 
-  - Run with `npm run cover-letter` in project directory
+  - Run with `npm run coverletter` in project directory
   - Writes to PWD
 
 - Follow the prompts to write your first personalized cover letter!
