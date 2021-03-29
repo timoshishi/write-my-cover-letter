@@ -1,13 +1,3 @@
-// const fs = require('fs');
-// const path = require('path');
-// const fillStrTemplate = require('./templateParser');
-
-// const DATA_DIR = path.join(__dirname, 'cvPersonalization');
-// const roles = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'roles.json')));
-
-// const industries = JSON.parse(
-//   fs.readFileSync(path.join(DATA_DIR, 'industries.json'))
-// );
 /**
  * generateParagraphs
  * @param {String} industry Industry of company

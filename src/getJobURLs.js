@@ -3,9 +3,6 @@ const path = require('path');
 const fs = require('fs');
 const fetch = require('node-fetch');
 
-// const jobs = fs
-//   .readFileSync(path.resolve(__dirname, 'jobURLs', 'hnJobs.txt'), 'utf8')
-//   .split(',\n ');
 const hnURL = 'https://hacker-news.firebaseio.com/v0';
 
 const getJobIds = async () => {

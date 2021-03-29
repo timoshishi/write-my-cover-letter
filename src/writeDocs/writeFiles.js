@@ -2,7 +2,6 @@ const writeDocx = require('./writeDocx');
 const writePdf = require('./writePDF');
 const generateParagraphs = require('../generateParagraphs.js');
 const deleteDocx = require('./deleteDocx');
-const { convertWithOptions } = require('libreoffice-convert');
 
 const writeFiles = async (options) => {
   const paras = generateParagraphs(options);
