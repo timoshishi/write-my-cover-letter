@@ -5,7 +5,7 @@ const writePDF = ({ name, company, copy }, path = '') => {
   const FILE_PATH = `${path.length ? `${path}/` : ''}`;
 
   return new Promise((resolve, reject) => {
-    const formattedCompany = `${company.split(' ').join('_')}_cover_letter.pdf`;
+    const formattedCompany = `${company.split(' ').join('_')}.pdf`;
     const formattedName = `${name.split(' ').join('_')}_cover_letter.pdf`;
     const enterPath = `${name.split(' ').join('_')}_cover_letter.docx`;
     const extend = '.pdf';

@@ -24,7 +24,7 @@ const writeDocx = (options, path = '') => {
 
   const BASE_PATH = `${path.length ? `${path}/` : ''}`;
   const formattedName = `${name.split(' ').join('_')}_cover_letter.docx`;
-  const formattedCompany = `${company.split(' ').join('_')}_cover_letter.docx`;
+  const formattedCompany = `${company.split(' ').join('_')}.docx`;
   doc.addSection({
     properties: {},
     children: [
