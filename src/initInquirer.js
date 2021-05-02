@@ -1,11 +1,13 @@
 const inquirer = require('inquirer');
 const createCoverQuestions = require('./createCoverQuestions');
 const searchJobs = require('./getJobURLs');
+const { createHeader } = require('./createHeader');
 const readPersonalization = require('./readPersonalization');
 const writeFiles = require('./writeDocs/writeFiles');
 
 const initInquirer = async () => {
   try {
+    await createHeader();
     const initialQuestions = await inquirer.prompt([
       {
         type: 'list',
