@@ -26,6 +26,21 @@ npm install -g write-my-cover-letter
 - Run by typing `coverletter` in your terminal
 - Writes to your present working directory
 
+## Alternate Installation
+
+Clone project from github
+
+`git clone https://github.com/timoshishi/write-my-cover-letter.git`
+
+- Install globally: `npm install -g ./` in base directory of project
+
+  - Run by typing `coverletter` in your terminal
+  - Writes to your present working directory
+
+- Install locally: `npm install` in base directory of the project
+  - Run by typing `npm run coverletter` in project directory
+  - Writes to your present working directory
+
 ## Demo
 
 Insert gif or link to demo
@@ -56,11 +71,11 @@ To run tests, run the following command
 
 ## FAQ
 
-#### Is this in any way useful to me?
+**Is this in any way useful to me?**
 
 It is unlikely at this point as it is highly customized to my use case
 
-#### How can I personalize Write my Cover Letter for myself?
+**How can I personalize Write my Cover Letter for myself?**
 
 Altering the information contained in JSON files located at
 `/src/cvPersonalization`

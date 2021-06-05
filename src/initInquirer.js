@@ -14,7 +14,10 @@ const initInquirer = async () => {
         name: 'initial',
         message:
           'Would you like to write a cover letter or search for recent job listings?',
-        choices: ['Write a cover letter', 'Search Jobs'],
+        choices: [
+          'Write a cover letter',
+          'Search Jobs (Open recent Hacker News jobs in browser)',
+        ],
       },
     ]);
     if (initialQuestions.initial === 'Search Jobs') {
@@ -27,13 +30,6 @@ const initInquirer = async () => {
       // console.log(options);
       await writeFiles({ ...options, personalData });
     }
-    //const unfilledData = checkPersonalData(personalData)
-    //if (unfilledData) {
-    //const setupQuestions = createSetupQuestions(unfilledData)
-    //const personalData = await inquirer.prompt(setupQuestions)
-    //await writePersonalization(personalData)
-    //personalData = readPersonalization
-    // }
   } catch (err) {
     console.error(err);
   }
