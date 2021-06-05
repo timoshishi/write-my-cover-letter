@@ -3,24 +3,28 @@
 This is a script to aid writing personalized cover letters in .pdf or .docx
 format to your disk.
 
+## [https://github.com/timoshishi/write-my-cover-letter.git](https://github.com/timoshishi/write-my-cover-letter.git)
+
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
 ![](cover_letter.gif)
 
 ## Installation
 
-Clone project from github
+### Run it once
 
-`git clone https://github.com/timoshishi/write-my-cover-letter.git`
+```
+npx write-my-cover-letter
+```
 
-- Install globally: `npm install -g ./` in base directory of project
+### Install globally:
 
-  - Run by typing `coverletter` in your terminal
-  - Writes to your present working directory
+```
+npm install -g write-my-cover-letter
+```
 
-- Install locally: `npm install` in base directory of the project
-  - Run by typing `npm run coverletter` in project directory
-  - Writes to your present working directory
+- Run by typing `coverletter` in your terminal
+- Writes to your present working directory
 
 ## Demo
 
