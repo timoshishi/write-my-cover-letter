@@ -3,8 +3,6 @@
 This is a script to aid writing personalized cover letters in .pdf or .docx
 format to your disk.
 
-## [https://github.com/timoshishi/write-my-cover-letter.git](https://github.com/timoshishi/write-my-cover-letter.git)
-
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
 ![](cover_letter.gif)
