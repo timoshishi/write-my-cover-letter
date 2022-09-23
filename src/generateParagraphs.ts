@@ -1,21 +1,8 @@
-/**
- * generateParagraphs
- * @param {String} industry Industry of company
- * @param {String} company Name of company
- * @param {String} name Your name
- * @param {String} position Position listed in job Ad
- * @param {String} value A value the company holds
- * @param {String} intro Introductory sentence about what draws you to the company
- * @param {String} contact Contact or hiring manager at the company
- * @param {Object} personalData data read from disk
- * @param {String} skills user entered string of relevant skills
- * @returns {object}
- */
+import { Options } from './types';
 
-const fillStrTemplate = (str, obj) =>
-  str.replace(/\${(.*?)}/g, (x, g) => obj[g]);
+const fillStrTemplate = (str: string, obj: Record<string, string>) => str.replace(/\${(.*?)}/g, (x, g) => obj[g]);
 
-const generateParagraphs = ({
+export const generateParagraphs = ({
   industry,
   company,
   position,
@@ -25,7 +12,7 @@ const generateParagraphs = ({
   contact,
   skills,
   personalData,
-}) => {
+}: Options) => {
   const {
     aboutMe: { aboutMe },
     roles,
@@ -39,10 +26,7 @@ const generateParagraphs = ({
   });
   const expertise = `My interest was compounded when I noticed that my ${skills} expertise aligns very well with your needs for the ${position} position and I am excited to contribute to ${company}’s continued growth.`;
 
-  const siteString = sites.reduce(
-    (str, site, i) => (i !== sites.length - 1 ? `${site} |` : site),
-    ''
-  );
+  const siteString = sites.reduce((str, site, i) => (i !== sites.length - 1 ? `${site} |` : site), '');
   return {
     toWhomItMayConcern: `Dear ${contact || `${company} team`},`,
     introPara: `${intro} ${industryString} ${expertise}`,
@@ -53,5 +37,3 @@ const generateParagraphs = ({
     name: name,
   };
 };
-
-module.exports = generateParagraphs;

@@ -1,9 +1,9 @@
-const inquirer = require('inquirer');
-const createCoverQuestions = require('./createCoverQuestions');
-const searchJobs = require('./getJobURLs');
-const { createHeader } = require('./createHeader');
-const readPersonalization = require('./readPersonalization');
-const writeFiles = require('./writeDocs/writeFiles');
+import inquirer from 'inquirer';
+import { createCoverQuestions } from './createCoverQuestions';
+import searchJobs from './getJobURLs';
+import { createHeader } from './createHeader';
+import readPersonalization from './readPersonalization';
+import { writeFiles } from './writeDocs/writeFiles';
 
 const initInquirer = async () => {
   try {
@@ -12,12 +12,8 @@ const initInquirer = async () => {
       {
         type: 'list',
         name: 'initial',
-        message:
-          'Would you like to write a cover letter or search for recent job listings?',
-        choices: [
-          'Write a cover letter',
-          'Search Jobs (Open recent Hacker News jobs in browser)',
-        ],
+        message: 'Would you like to write a cover letter or search for recent job listings?',
+        choices: ['Write a cover letter', 'Search Jobs (Open recent Hacker News jobs in browser)'],
       },
     ]);
     if (initialQuestions.initial === 'Search Jobs') {

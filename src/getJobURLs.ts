@@ -19,12 +19,10 @@ const getJobIds = async () => {
 const getNewJobs = async () => {
   try {
     const jobIds = await getJobIds();
-    const prevJobData = fs.readFileSync(
-      path.resolve(__dirname, 'jobURLs', 'hnJobs.json')
-    );
+    const prevJobData = fs.readFileSync(path.resolve(__dirname, 'jobURLs', 'hnJobs.json'), 'utf8');
     const { prevJobs } = JSON.parse(prevJobData);
     // debugger;
-    const jobsToWrite = jobIds.filter((job) => !prevJobs.includes(job));
+    const jobsToWrite = jobIds.filter((job: string) => !prevJobs.includes(job));
     return jobsToWrite.length ? jobsToWrite : prevJobs;
   } catch (err) {
     console.error(err);
@@ -35,13 +33,13 @@ const openJobsInBrowser = async () => {
   try {
     const jobIds = await getNewJobs();
     if (jobIds && jobIds.length) {
-      const promises = await jobIds.map((id) => {
+      const promises = await jobIds.map((id: string) => {
         return fetch(`${hnURL}/item/${id}.json`)
-          .then((res) => res.json())
-          .then((data) => {
+          .then((res: any) => res.json())
+          .then((data: JSON) => {
             return data;
           })
-          .catch((err) => console.error(err));
+          .catch((err: unknown) => console.error(err));
       });
       const jobs = await Promise.all(promises);
       jobs.map((job) => job?.url && open(job.url));
@@ -55,15 +53,11 @@ const writeJobs = async () => {
   try {
     const jobIds = await getNewJobs();
     const jobs = JSON.stringify({ prevJobs: jobIds });
-    fs.writeFile(
-      path.resolve(__dirname, 'jobURLs', 'hnJobs.json'),
-      jobs,
-      (err) => {
-        if (err) {
-          return console.error(err);
-        }
+    fs.writeFile(path.resolve(__dirname, 'jobURLs', 'hnJobs.json'), jobs, (err: Error | null) => {
+      if (err) {
+        return console.error(err);
       }
-    );
+    });
   } catch (err) {
     console.error(err);
   }
@@ -73,4 +67,4 @@ const searchJobs = () => {
   openJobsInBrowser();
 };
 
-module.exports = searchJobs;
+export default searchJobs;
