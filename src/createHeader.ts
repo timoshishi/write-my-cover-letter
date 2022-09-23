@@ -1,9 +1,8 @@
-const figlet = require('figlet');
-const chalk = require('chalk');
-const boxen = require('boxen');
-const { yellow } = require('chalk');
+import chalk from 'chalk';
+import figlet from 'figlet';
+import boxen, { Options } from 'boxen';
 
-const boxenOptions = {
+const boxenOptions: Options = {
   padding: 1,
   margin: 1,
   borderStyle: 'double',
@@ -12,7 +11,7 @@ const boxenOptions = {
   borderColor: 'yellow',
 };
 
-const createHeader = () => {
+const createHeader = (): Promise<void> => {
   return new Promise((resolve, reject) => {
     figlet.text(
       'Write My Cover Letter',
@@ -22,14 +21,16 @@ const createHeader = () => {
         width: 70,
         whitespaceBreak: true,
       },
-      function (err, data) {
+      (err, data) => {
         if (err) {
           console.log('Something went wrong...');
           console.dir(err);
-          reject();
+          reject(err);
           return;
         }
-        resolve(console.log(chalk.blue(boxen(data, boxenOptions))));
+        if (data) {
+          resolve(console.log(chalk.blue(boxen(data, boxenOptions))));
+        }
       }
     );
   });
