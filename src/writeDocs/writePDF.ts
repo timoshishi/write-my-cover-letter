@@ -1,7 +1,18 @@
-const libre = require('libreoffice-convert');
-const fs = require('fs');
+import libre from 'libreoffice-convert';
+import fs from 'fs';
 
-const writePDF = ({ name, company, copy }, path = '') => {
+const writePDF = (
+  {
+    name,
+    company,
+    copy,
+  }: {
+    name: string;
+    company: string;
+    copy: boolean;
+  },
+  path = ''
+) => {
   const FILE_PATH = `${path.length ? `${path}/` : ''}`;
 
   return new Promise((resolve, reject) => {
@@ -12,7 +23,7 @@ const writePDF = ({ name, company, copy }, path = '') => {
 
     const file = fs.readFileSync(enterPath);
 
-    libre.convert(file, extend, undefined, (err, done) => {
+    libre.convert(file, extend, undefined, (err: Error | null, done: Buffer) => {
       if (err) {
         console.log(`Error converting file: ${err}`);
         reject(err);
@@ -26,4 +37,4 @@ const writePDF = ({ name, company, copy }, path = '') => {
   });
 };
 
-module.exports = writePDF;
+export default writePDF;

@@ -1,10 +1,9 @@
 import inquirer from 'inquirer';
-import createCoverQuestions from './createCoverQuestions';
+import { createCoverQuestions } from './createCoverQuestions';
 import searchJobs from './getJobURLs';
 import { createHeader } from './createHeader';
 import readPersonalization from './readPersonalization';
 import { writeFiles } from './writeDocs/writeFiles';
-import { Options } from './types';
 
 const initInquirer = async () => {
   try {

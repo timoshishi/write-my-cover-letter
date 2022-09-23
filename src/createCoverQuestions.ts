@@ -1,4 +1,6 @@
-const createCoverQuestions = (personalData) => {
+import { PersonalData } from './types';
+
+export const createCoverQuestions = (personalData: PersonalData) => {
   return [
     {
       type: 'input',
@@ -31,8 +33,7 @@ const createCoverQuestions = (personalData) => {
     {
       type: 'input',
       name: 'skills',
-      message:
-        'Enter skills listed in description <skill>, <skill> and <skill>',
+      message: 'Enter skills listed in description <skill>, <skill> and <skill>',
     },
     {
       type: 'checkbox',
@@ -51,4 +52,3 @@ const createCoverQuestions = (personalData) => {
     },
   ];
 };
-module.exports = createCoverQuestions;
