@@ -1,5 +1,5 @@
-const createCoverQuestions = require('../src/createCoverQuestions');
-const readPersonalization = require('../src/readPersonalization');
+import { createCoverQuestions } from '../src/createCoverQuestions';
+import { PersonalData } from '../src/types';
 
 const personalData = {
   roles: { brasco: 'donnie', vito: 'genovese' },
@@ -10,7 +10,7 @@ const personalData = {
   },
 };
 
-const questions = createCoverQuestions(personalData);
+const questions = createCoverQuestions(personalData as unknown as PersonalData);
 test('it should return an array', () => {
   expect(Array.isArray(questions)).toEqual(true);
 });
@@ -18,7 +18,7 @@ test('it should return an array', () => {
 test('role should be a length of 2', () => {
   const roleLength = questions.reduce((len, ques) => {
     if (ques.name === 'role') {
-      len = ques.choices.length;
+      len = ques?.choices?.length ?? 0;
       return len;
     } else {
       return len;
@@ -30,7 +30,7 @@ test('role should be a length of 2', () => {
 test('industry should be a length of 3', () => {
   const roleLength = questions.reduce((len, ques) => {
     if (ques.name === 'industry') {
-      len = ques.choices.length;
+      len = ques?.choices?.length ?? 0;
       return len;
     } else {
       return len;
@@ -41,11 +41,7 @@ test('industry should be a length of 3', () => {
 
 test('all questions in array should have a type, name and message property', () => {
   const hasAllProps = questions.every((ques) => {
-    return (
-      ques.hasOwnProperty('type') &&
-      ques.hasOwnProperty('name') &&
-      ques.hasOwnProperty('message')
-    );
+    return ques.hasOwnProperty('type') && ques.hasOwnProperty('name') && ques.hasOwnProperty('message');
   });
   expect(hasAllProps).toEqual(true);
 });

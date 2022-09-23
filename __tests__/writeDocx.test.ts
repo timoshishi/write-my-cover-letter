@@ -1,8 +1,10 @@
-const generateParagraphs = require('../src/generateParagraphs');
-const writeDocx = require('../src/writeDocs/writeDocx');
-const path = require('path');
-const fs = require('fs');
-const readPersonalization = require('../src/readPersonalization');
+import { generateParagraphs } from '../src/generateParagraphs';
+import writeDocx from '../src/writeDocs/writeDocx';
+import path from 'path';
+import fs from 'fs';
+// const readPersonalization = require('../src/readPersonalization');
+import readPersonalization from '../src/readPersonalization';
+import { Options } from '../src/types';
 const options = {
   industry: 'generic',
   company: 'RED ALERT',
@@ -13,9 +15,7 @@ const options = {
   personalData: readPersonalization(),
   copy: false,
   name: 'awesome',
-  copy: false,
-};
-const personalData = readPersonalization();
+} as unknown as Options;
 const paras = generateParagraphs({
   ...options,
 });
@@ -29,14 +29,14 @@ afterEach(() => {
 test('it should write a file to disk', () => {
   const beforeWrite = fs.readdirSync(path.resolve(__dirname));
   console.log(paras);
-  return writeDocx(paras, __dirname).then((un) => {
+  return writeDocx(paras as any, __dirname).then((un) => {
     const afterWrite = fs.readdirSync(path.resolve(__dirname));
     expect(afterWrite.length).toBe(beforeWrite.length + 1);
   });
 });
 
 test('it should write a docx file with a properly formatted title', () => {
-  return writeDocx(paras, __dirname).then((un) => {
+  return writeDocx(paras as any, __dirname).then((un) => {
     const files = fs.readdirSync(path.resolve(__dirname));
     expect(files).toContain(fileName);
   });

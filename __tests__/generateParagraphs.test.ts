@@ -1,5 +1,6 @@
-const generateParagraphs = require('../src/generateParagraphs');
-const readPersonalization = require('../src/readPersonalization');
+import { generateParagraphs } from '../src/generateParagraphs';
+import readPersonalization from '../src/readPersonalization';
+import { Options } from '../src/types';
 
 const options = {
   industry: 'generic',
@@ -9,7 +10,7 @@ const options = {
   intro: 'Here is a thing that I have been doing lately',
   contact: 'hello',
   personalData: readPersonalization(),
-};
+} as unknown as Options;
 test('it should return an object', () => {
   const paras = generateParagraphs(options);
   expect(typeof paras).toBe('object');
@@ -30,7 +31,7 @@ test('if a contact is not provided toWhomItMayConcern should include To the wond
     intro: 'Here is a thing that I have been doing lately',
     contact: undefined,
     personalData: readPersonalization(),
-  };
+  } as unknown as Options;
   const paras = generateParagraphs(options);
   const regex = new RegExp(`To the wonderful folks at ${options.company}`);
   expect(paras.toWhomItMayConcern).toMatch(regex);
@@ -42,16 +43,12 @@ test('it should return six key value pairs', () => {
 });
 
 test('all values returned should have length', () => {
-  const allHaveLength = Object.values(generateParagraphs(options)).every(
-    (value) => value.length > 0
-  );
+  const allHaveLength = Object.values(generateParagraphs(options)).every((value) => value.length > 0);
   expect(allHaveLength).toBe(true);
 });
 
 test('no values should have no length', () => {
-  const someHaveNoLength = Object.values(generateParagraphs(options)).some(
-    (value) => value.length === 0
-  );
+  const someHaveNoLength = Object.values(generateParagraphs(options)).some((value) => value.length === 0);
   expect(someHaveNoLength).toBe(false);
 });
 
