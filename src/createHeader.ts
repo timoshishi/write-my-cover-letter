@@ -11,7 +11,7 @@ const boxenOptions: Options = {
   borderColor: 'yellow',
 };
 
-const createHeader = (): Promise<void> => {
+export const createHeader = (): Promise<void> => {
   return new Promise((resolve, reject) => {
     figlet.text(
       'Write My Cover Letter',
@@ -35,5 +35,3 @@ const createHeader = (): Promise<void> => {
     );
   });
 };
-
-module.exports = { createHeader };
