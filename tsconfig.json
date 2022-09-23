@@ -14,6 +14,7 @@
 
     /* Language and Environment */
     "target": "es2016" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+    "noEmit": true,
     // "lib": [],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */
     // "jsx": "preserve",                                /* Specify what JSX code is generated. */
     // "experimentalDecorators": true,                   /* Enable experimental support for TC39 stage 2 draft decorators. */
@@ -26,7 +27,7 @@
     // "useDefineForClassFields": true,                  /* Emit ECMAScript-standard-compliant class fields. */
 
     /* Modules */
-    "module": "commonjs" /* Specify what module code is generated. */,
+    // "module": "commonjs" /* Specify what module code is generated. */,
     "rootDir": "." /* Specify the root folder within your source files. */,
 
     // "moduleResolution": "node",                       /* Specify how TypeScript looks up a file from a given module specifier. */
@@ -101,5 +102,6 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
   "include": ["src/**/*"] /* Specify the list of files to be included. */,
-  "exclude": ["node_modules", "**/types/*", "__mocks__", "__tests__/**/*"]
+  "exclude": ["**/types/*", "__mocks__", "__tests__/**/*"],
+  "moduleResolution": "commonjs" /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
 }

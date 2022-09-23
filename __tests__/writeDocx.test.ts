@@ -2,7 +2,7 @@ import { generateParagraphs } from '../src/generateParagraphs';
 import writeDocx from '../src/writeDocs/writeDocx';
 import path from 'path';
 import fs from 'fs';
-// const readPersonalization = require('../src/readPersonalization');
+
 import readPersonalization from '../src/readPersonalization';
 import { Options } from '../src/types';
 const options = {
