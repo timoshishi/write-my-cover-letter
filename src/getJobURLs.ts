@@ -1,8 +1,7 @@
-const open = require('open');
-const path = require('path');
-const fs = require('fs');
-const fetch = require('node-fetch');
-
+import fs from 'fs';
+import path from 'path';
+import open from 'open';
+import fetch from 'node-fetch';
 const hnURL = 'https://hacker-news.firebaseio.com/v0';
 
 const getJobIds = async () => {

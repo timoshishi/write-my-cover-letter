@@ -4,3 +4,5 @@ node_modules/
 *.pdf
 coverage/
 build/
+package-lock.json
+*.tgz

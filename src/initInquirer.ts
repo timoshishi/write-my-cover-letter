@@ -31,4 +31,4 @@ const initInquirer = async () => {
   }
 };
 
-module.exports = initInquirer;
+export default initInquirer;
