@@ -1,5 +1,5 @@
-import { createCoverQuestions } from './src/createCoverQuestions';
-import { PersonalData } from './src/types';
+import { createCoverQuestions } from '../src/createCoverQuestions';
+import { PersonalData } from '../src/types';
 
 const personalData = {
   roles: { brasco: 'donnie', vito: 'genovese' },
