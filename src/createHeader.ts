@@ -11,7 +11,7 @@ const boxenOptions: Options = {
   borderColor: 'yellow',
 };
 
-export const createHeader = (): Promise<void> => {
+export const createHeader = (): Promise<string> => {
   return new Promise((resolve, reject) => {
     figlet.text(
       'Write My Cover Letter',
@@ -23,13 +23,14 @@ export const createHeader = (): Promise<void> => {
       },
       (err, data) => {
         if (err) {
-          console.log('Something went wrong...');
-          console.dir(err);
           reject(err);
           return;
         }
         if (data) {
-          resolve(console.log(chalk.blue(boxen(data, boxenOptions))));
+          const header = chalk.blue(boxen(data, boxenOptions));
+          console.log(header);
+          // for unit testing
+          resolve(chalk.blue(boxen(data, boxenOptions)));
         }
       }
     );

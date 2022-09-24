@@ -6,7 +6,7 @@ const readPersonalization = async (filePath?: string[]) => {
   const completePath = filePath
     ? path.resolve(...filePath, 'cvPersonalization')
     : path.resolve(__dirname, '..', 'cvPersonalization');
-  console.log('completePath', completePath);
+
   try {
     const fileNames = await readdir(completePath);
     const personalData = {} as unknown as PersonalData;

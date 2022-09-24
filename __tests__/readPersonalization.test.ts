@@ -9,7 +9,6 @@ describe('readPersonalization', () => {
     const fileNames = fs.readdirSync(path.resolve(__dirname, '__mocks__', 'cvPersonalization'));
     const personalData = await readPersonalization();
     expect(personalData && Object.keys(personalData).length).toEqual(fileNames.length);
-    console.log('personalData', personalData);
   });
 
   test('it should have the same amount of keys in each object as those in the mock', async () => {

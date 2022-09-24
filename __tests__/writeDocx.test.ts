@@ -28,7 +28,6 @@ afterEach(() => {
 
 test('it should write a file to disk', () => {
   const beforeWrite = fs.readdirSync(path.resolve(__dirname));
-  console.log(paras);
   return writeDocx(paras as any, __dirname).then((un) => {
     const afterWrite = fs.readdirSync(path.resolve(__dirname));
     expect(afterWrite.length).toBe(beforeWrite.length + 1);

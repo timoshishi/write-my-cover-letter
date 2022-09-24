@@ -58,7 +58,6 @@ describe('generateParagraphs', () => {
   });
   test('it should return the correct text for contactInfo', () => {
     const { contactInfo } = generateParagraphs(generateParagraphsOptions);
-    console.log('contactInfo', contactInfo);
     expect(contactInfo.includes(personalData.contactInfo.email)).toBeTruthy();
     expect(contactInfo.includes(personalData.contactInfo.phone)).toBeTruthy();
     expect(contactInfo.includes(personalData.contactInfo.sites[0])).toBeTruthy();

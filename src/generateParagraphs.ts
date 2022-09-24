@@ -1,5 +1,6 @@
 import { PersonalData, TextResponses, CVText } from './types';
 import { INDUSTRIES } from './constants';
+
 const fillStrTemplate = (str: string, obj: Record<string, string>) => str.replace(/\${(.*?)}/g, (x, g) => obj[g]);
 
 export const generateParagraphs = ({
