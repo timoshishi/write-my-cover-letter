@@ -1,38 +1,111 @@
-import { generateParagraphs } from '../src/generateParagraphs';
 import writeDocx from '../src/writeDocs/writeDocx';
-import readPersonalization from '../src/readPersonalization';
-import { Options } from '../src/types';
 import writePDF from '../src/writeDocs/writePDF';
-import fs from 'fs';
 import path from 'path';
-const options = {
-  industry: 'generic',
-  company: 'RED ALERT',
-  position: 'FULL STACK',
-  role: 'frontend',
-  intro: 'Here is a thing that I have been doing lately',
-  contact: 'hello',
-  personalData: readPersonalization(),
-} as unknown as Options;
-const paras = generateParagraphs(options);
+import fs from 'fs';
+import { personalData, cvText, textResponses } from './__mocks__';
 
-const fileName = `${paras.name.split(' ').join('_')}_cover_letter`;
+describe('writeDocx', () => {
+  beforeEach(() => {
+    // remove all files from the __tests__/test-docs directory
+    const testDocsDir = path.resolve(__dirname, 'test-docs');
+    const files = fs.readdirSync(testDocsDir);
+    files.forEach((file) => {
+      fs.unlinkSync(path.join(testDocsDir, file));
+    });
+  });
+  afterEach(() => {
+    // remove all files from the __tests__/test-docs directory
+    const testDocsDir = path.resolve(__dirname, 'test-docs');
+    const files = fs.readdirSync(testDocsDir);
+    files.forEach((file) => {
+      fs.unlinkSync(path.join(testDocsDir, file));
+    });
+  });
 
-beforeEach(async () => await writeDocx(paras as any, __dirname));
+  test('it should write a single file to disk if createCopy is false', async () => {
+    try {
+      await writeDocx(
+        {
+          personalData,
+          cvText,
+          createCopy: false,
+          company: 'test',
+        },
+        path.resolve(__dirname, 'test-docs')
+      );
+      const beforeWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
+      console.log('beforeWrite', beforeWrite);
 
-afterEach(() => {
-  fs.unlink(path.resolve(__dirname, `${fileName}.docx`), (err) => {
-    if (err) {
-      return fs.unlinkSync(path.resolve(__dirname, `${fileName}.pdf`));
-    } else {
-      return fs.unlinkSync(path.resolve(__dirname, `${fileName}.pdf`));
+      await writePDF(
+        {
+          name: personalData.contactInfo.name,
+          createCopy: false,
+          company: 'test',
+        },
+        path.resolve(__dirname, 'test-docs')
+      );
+
+      const afterWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
+      console.log('afterWrite', afterWrite);
+      expect(afterWrite.length).toBe(beforeWrite.length + 1);
+    } catch (error) {
+      console.error(error);
     }
   });
-});
 
-test('it should write a pdf file with a properly formatted title', () => {
-  return writePDF(paras as any, __dirname).then((un) => {
-    const files = fs.readdirSync(path.resolve(__dirname));
-    expect(files).toContain(`${fileName}.pdf`);
+  test('it should write two files to disk if createCopy is true', async () => {
+    try {
+      await writeDocx(
+        {
+          personalData,
+          cvText,
+          createCopy: false,
+          company: 'test',
+        },
+        path.resolve(__dirname, 'test-docs')
+      );
+      const beforeWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
+      console.log('beforeWrite', beforeWrite);
+
+      await writePDF(
+        {
+          name: personalData.contactInfo.name,
+          createCopy: true,
+          company: 'test',
+        },
+        path.resolve(__dirname, 'test-docs')
+      );
+
+      const afterWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
+      console.log('afterWrite', afterWrite);
+      expect(afterWrite.length).toBe(beforeWrite.length + 2);
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+  test('it should resolve with text of "pdf written"', async () => {
+    try {
+      await writeDocx(
+        {
+          personalData,
+          cvText,
+          createCopy: false,
+          company: 'test',
+        },
+        path.resolve(__dirname, 'test-docs')
+      );
+      const result = await writePDF(
+        {
+          name: personalData.contactInfo.name,
+          createCopy: true,
+          company: 'test',
+        },
+        path.resolve(__dirname, 'test-docs')
+      );
+      expect(result).toBe('pdf written');
+    } catch (error) {
+      console.error(error);
+    }
   });
 });
