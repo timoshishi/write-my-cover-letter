@@ -21,7 +21,6 @@ export interface Options {
 export interface PersonalData {
   aboutMe: AboutMe;
   contactInfo: ContactInfo;
-  industries: Industries;
   roles: Roles;
 }
 

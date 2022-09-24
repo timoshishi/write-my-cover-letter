@@ -1,7 +1,8 @@
-import { DefaultStyles, Options, PersonalData } from '../types';
+import { PersonalData, CVText } from '../types';
 import fs from 'fs';
 import { Document, IRunOptions, Packer, Paragraph, TextRun } from 'docx';
 import { DEFAULT_STYLES } from '../../src/constants';
+
 const doc = new Document();
 
 const createDocxParagraph = (text: string, options: IRunOptions) => {

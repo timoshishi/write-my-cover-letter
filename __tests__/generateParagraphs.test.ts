@@ -1,34 +1,7 @@
 import { generateParagraphs } from '../src/generateParagraphs';
 import { PersonalData, TextResponses, CVText } from '../src/types';
-import { INDUSTRIES } from '../src/constants';
-
-const textResponses: TextResponses = {
-  industry: 'generic',
-  company: 'RED ALERT',
-  position: 'FULL STACK',
-  role: 'frontend',
-  intro: 'Here is a thing that I have been doing lately',
-  skills: 'JavaScript, React, TypeScript',
-};
-
-const personalData: PersonalData = {
-  contactInfo: {
-    name: 'John Doe',
-    email: 'jdoe@test.com',
-    phone: '555-555-5555',
-    sites: ['https://johndoe.com', 'linkedin.com'],
-  },
-  aboutMe: {
-    aboutMe: 'I am a person who does things',
-  },
-  roles: {
-    frontend: 'I am a frontend developer',
-    backend: 'I am a backend developer',
-    fullstack: 'I am a fullstack developer',
-  },
-  industries: INDUSTRIES,
-};
-
+import { personalData } from './__mocks__/personalData';
+import { textResponses } from './__mocks__/textResponses';
 describe('generateParagraphs', () => {
   let generateParagraphsOptions: { textResponses: TextResponses; personalData: PersonalData };
 
@@ -55,7 +28,6 @@ describe('generateParagraphs', () => {
 
   test('all properties should be strings with length', () => {
     const cvText: CVText = generateParagraphs(generateParagraphsOptions);
-    console.log('cvText', JSON.stringify(cvText, null, 2));
     expect(Object.values(cvText).every((value) => typeof value === 'string')).toBe(true);
     expect(Object.values(cvText).every((value) => value.length > 0)).toBe(true);
   });

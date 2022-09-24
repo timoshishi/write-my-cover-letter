@@ -1,17 +1,25 @@
 import { PersonalData } from './types';
-import fs from 'fs';
+import { readdir, readFile } from 'fs/promises';
 import path from 'path';
 
-const readPersonalization = () => {
-  const fileNames = fs.readdirSync(path.resolve(__dirname, '..', 'cvPersonalization'));
-  const personalData = {} as PersonalData;
-  fileNames.forEach((fileName: string) => {
-    const fileData = fs.readFileSync(path.resolve(__dirname, '..', 'cvPersonalization', fileName), 'utf8');
-    const objectName: keyof PersonalData = fileName.split('.')[0] as keyof PersonalData;
-    personalData[objectName] = JSON.parse(fileData);
-  });
-  return personalData;
+const readPersonalization = async (filePath?: string[]) => {
+  const completePath = filePath
+    ? path.resolve(...filePath, 'cvPersonalization')
+    : path.resolve(__dirname, '..', 'cvPersonalization');
+  console.log('completePath', completePath);
+  try {
+    const fileNames = await readdir(completePath);
+    const personalData = {} as unknown as PersonalData;
+    for (let i = 0; i < fileNames.length; i++) {
+      const fileName = fileNames[i];
+      const fileData = await readFile(path.join(completePath, fileName), 'utf8');
+      const objectName = fileName.split('.')[0];
+      personalData[objectName] = JSON.parse(fileData);
+    }
+    return personalData;
+  } catch (error) {
+    console.error(error);
+  }
 };
-readPersonalization();
 
 export default readPersonalization;
