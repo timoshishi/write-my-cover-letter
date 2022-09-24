@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 import { createCoverQuestions } from './createCoverQuestions';
 import { createHeader } from './createHeader';
-import readPersonalization from './readPersonalization';
+import { readPersonalization } from './readPersonalization';
 import { TextResponses } from './types';
 import { writeFiles } from './writeDocs/writeFiles';
 
@@ -31,8 +31,9 @@ const initInquirer = async () => {
           }[key];
       }
     }
-    console.log({ result });
+
     await writeFiles({ textResponses: result, outputTypes, createCopy, personalData });
+    return 'files written';
   } catch (err) {
     console.error(err);
   }

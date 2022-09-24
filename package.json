@@ -13,7 +13,8 @@
     "fonts"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "jest --runInBand",
+    "test:coverage": "jest --runInBand --coverage",
     "start": "ts-node src/index.ts",
     "build": "rollup -c rollup.config.js"
   },

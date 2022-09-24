@@ -33,7 +33,10 @@ export const writeFiles = async (
       );
     }
     if (!outputTypes.includes('docx')) {
-      deleteDocx(personalData.contactInfo.name, WRITE_PATH);
+      await deleteDocx(personalData.contactInfo.name, 'personal', WRITE_PATH);
+      if (createCopy) {
+        await deleteDocx(textResponses.company, 'companyCopy', WRITE_PATH);
+      }
     }
   } catch (err) {
     console.error(err);

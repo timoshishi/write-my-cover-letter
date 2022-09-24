@@ -1,4 +1,4 @@
-import { CVText } from '../../src/types';
+import { CVText } from '../src/types';
 
 export const cvText: CVText = {
   toWhomItMayConcern: 'Dear RED ALERT team,',

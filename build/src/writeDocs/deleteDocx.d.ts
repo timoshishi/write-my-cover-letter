@@ -1,2 +1,2 @@
-declare const deleteDocx: (name: string, testPath?: string) => void;
+declare const deleteDocx: (name: string, type?: 'personal' | 'companyCopy', writePath?: string) => Promise<void>;
 export default deleteDocx;

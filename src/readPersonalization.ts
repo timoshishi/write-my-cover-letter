@@ -2,7 +2,7 @@ import { PersonalData } from './types';
 import { readdir, readFile } from 'fs/promises';
 import path from 'path';
 
-const readPersonalization = async (filePath?: string[]) => {
+export const readPersonalization = async (filePath?: string[]) => {
   const completePath = filePath
     ? path.resolve(...filePath, 'cvPersonalization')
     : path.resolve(__dirname, '..', 'cvPersonalization');
@@ -21,5 +21,3 @@ const readPersonalization = async (filePath?: string[]) => {
     console.error(error);
   }
 };
-
-export default readPersonalization;

@@ -1,4 +1,4 @@
-import { TextResponses } from '../../src/types';
+import { TextResponses } from '../src/types';
 
 export const textResponses: TextResponses = {
   industry: 'generic',

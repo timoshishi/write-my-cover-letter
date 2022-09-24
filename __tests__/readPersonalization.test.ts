@@ -1,12 +1,12 @@
-import * as tsPersonalization from './__mocks__/tsPersonalization';
+import * as tsPersonalization from '../__mocks__/tsPersonalization';
 import fs from 'fs';
 import path from 'path';
-import readPersonalization from '../src/readPersonalization';
+import { readPersonalization } from '../src/readPersonalization';
 const { aboutMe, contactInfo, roles } = tsPersonalization;
 
 describe('readPersonalization', () => {
   test('It should return one object per file in cvPersonalization', async () => {
-    const fileNames = fs.readdirSync(path.resolve(__dirname, '__mocks__', 'cvPersonalization'));
+    const fileNames = fs.readdirSync(path.resolve(__dirname, '..', '__mocks__', 'cvPersonalization'));
     const personalData = await readPersonalization();
     expect(personalData && Object.keys(personalData).length).toEqual(fileNames.length);
   });
@@ -20,7 +20,7 @@ describe('readPersonalization', () => {
     }
   });
   test('each object in personal data should have as many keys as those in the mock', async () => {
-    const personalData = await readPersonalization(['__tests__', '__mocks__']);
+    const personalData = await readPersonalization([__dirname, '..', '__mocks__']);
     if (personalData) {
       const personalDataKeys = Object.keys(personalData);
       const tsPersonalizationKeys = Object.keys(tsPersonalization);

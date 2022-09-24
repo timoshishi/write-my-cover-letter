@@ -1,7 +1,7 @@
 import { generateParagraphs } from '../src/generateParagraphs';
 import { PersonalData, TextResponses, CVText } from '../src/types';
-import { personalData } from './__mocks__/personalData';
-import { textResponses } from './__mocks__/textResponses';
+import { personalData } from '../__mocks__/personalData';
+import { textResponses } from '../__mocks__/textResponses';
 describe('generateParagraphs', () => {
   let generateParagraphsOptions: { textResponses: TextResponses; personalData: PersonalData };
 

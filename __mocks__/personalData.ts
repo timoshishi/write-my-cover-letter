@@ -1,4 +1,4 @@
-import { PersonalData } from '../../src/types';
+import { PersonalData } from '../src/types';
 
 export const personalData: PersonalData = {
   contactInfo: {

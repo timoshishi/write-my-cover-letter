@@ -1,10 +1,9 @@
 import { createCoverQuestions } from '../src/createCoverQuestions';
-import { personalData } from './__mocks__';
+import { personalData } from '../__mocks__';
 
 describe('createCoverQuestions', () => {
   test('it should return an array', () => {
     const questions = createCoverQuestions(personalData);
-    console.log(JSON.stringify(questions, null, 2));
     expect(Array.isArray(questions)).toEqual(true);
   });
 

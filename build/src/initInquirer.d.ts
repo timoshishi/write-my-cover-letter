@@ -1,2 +1,2 @@
-declare const initInquirer: () => Promise<void>;
+declare const initInquirer: () => Promise<"files written" | undefined>;
 export default initInquirer;

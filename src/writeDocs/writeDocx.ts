@@ -50,7 +50,6 @@ const writeDocx = ({ cvText, createCopy, personalData, company }: WriteDocxParam
           fs.writeFileSync(`${BASE_PATH}${formattedCompany}`, buffer);
         }
         // for unit testing
-        console.log(BASE_PATH);
         resolve(JSON.stringify(cvText));
       })
       .catch((err: unknown) => reject(err));

@@ -1,7 +1,7 @@
 import writeDocx from '../src/writeDocs/writeDocx';
 import path from 'path';
 import fs from 'fs';
-import { personalData, cvText } from './__mocks__';
+import { personalData, cvText } from '../__mocks__';
 
 describe('writeDocx', () => {
   beforeEach(() => {
@@ -24,7 +24,6 @@ describe('writeDocx', () => {
   test('it should write a single file to disk if createCopy is false', async () => {
     try {
       const beforeWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
-      console.log('beforeWrite', beforeWrite);
       await writeDocx(
         {
           personalData,
@@ -35,7 +34,6 @@ describe('writeDocx', () => {
         path.resolve(__dirname, 'test-docs')
       );
       const afterWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
-      console.log('afterWrite', afterWrite);
       expect(afterWrite.length).toBe(beforeWrite.length + 1);
     } catch (error) {
       console.error(error);
@@ -45,7 +43,6 @@ describe('writeDocx', () => {
   test('it should write two files to disk if createCopy is true', async () => {
     try {
       const beforeWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
-      console.log('beforeWrite', beforeWrite);
       await writeDocx(
         {
           personalData,
@@ -56,7 +53,6 @@ describe('writeDocx', () => {
         path.resolve(__dirname, 'test-docs')
       );
       const afterWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
-      console.log('afterWrite', afterWrite);
       expect(afterWrite.length).toBe(beforeWrite.length + 2);
     } catch (error) {
       console.error(error);
