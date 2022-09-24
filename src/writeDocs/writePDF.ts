@@ -5,11 +5,11 @@ const writePDF = (
   {
     name,
     company,
-    copy,
+    createCopy,
   }: {
     name: string;
     company: string;
-    copy: boolean;
+    createCopy: boolean;
   },
   path = ''
 ) => {
@@ -29,9 +29,10 @@ const writePDF = (
         reject(err);
       }
       fs.writeFileSync(`${FILE_PATH}${formattedName}`, done);
-      if (copy) {
+      if (createCopy) {
         fs.writeFileSync(`${FILE_PATH}${formattedCompany}`, done);
       }
+      // for unit testing
       resolve('pdf written');
     });
   });

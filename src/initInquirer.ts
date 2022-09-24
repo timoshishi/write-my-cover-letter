@@ -22,9 +22,8 @@ const initInquirer = async () => {
       let personalData = readPersonalization();
       const coverQuestions = createCoverQuestions(personalData);
 
-      const options = await inquirer.prompt(coverQuestions);
-      // console.log(options);
-      await writeFiles({ ...options, personalData });
+      const { outputTypes, createCopy, ...textResponses } = await inquirer.prompt(coverQuestions);
+      await writeFiles({ textResponses, outputTypes, createCopy, personalData });
     }
   } catch (err) {
     console.error(err);

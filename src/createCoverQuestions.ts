@@ -46,7 +46,7 @@ export const createCoverQuestions = (personalData: PersonalData) => {
     },
     {
       type: 'confirm',
-      name: 'copy',
+      name: 'createCopy',
       message: "Would you like to make a copy with the company's name?",
       default: true,
     },

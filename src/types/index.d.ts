@@ -6,7 +6,7 @@ export interface Options {
   intro: string;
   skills: string;
   outputTypes: string[];
-  copy: boolean;
+  createCopy: boolean;
   personalData: PersonalData;
   industries: Industries;
   company: string;
@@ -21,7 +21,6 @@ export interface Options {
 export interface PersonalData {
   aboutMe: AboutMe;
   contactInfo: ContactInfo;
-  defaultStyles: DefaultStyles;
   industries: Industries;
   roles: Roles;
 }
@@ -63,16 +62,20 @@ export interface Roles {
   backend: string;
 }
 
-// export interface Industries {
-//   generic: string;
-//   socialMedia: string;
-//   inclusive: string;
-//   openSource: string;
-//   healthCare: string;
-//   productivity: string;
-//   social: string;
-//   tech: string;
-//   foodService: string;
-//   education: string;
-//   consulting: string;
-// }
+export interface TextResponses {
+  company: string;
+  position: string;
+  role: string;
+  industry: string;
+  intro: string;
+  skills: string;
+}
+
+export interface CVText {
+  introPara: string;
+  contactInfo: string;
+  roleStr: string;
+  toWhomItMayConcern: string;
+  aboutMe: string;
+  closer: string;
+}
