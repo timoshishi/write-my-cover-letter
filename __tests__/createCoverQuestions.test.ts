@@ -14,6 +14,7 @@ describe('createCoverQuestions', () => {
     });
     expect(hasAllProps).toEqual(true);
   });
+
   test('choices with a name of outputTypes should have two choices one with name docx the other with pdf', () => {
     const questions = createCoverQuestions(personalData);
     const outputTypes = questions.find((ques) => {
@@ -27,6 +28,7 @@ describe('createCoverQuestions', () => {
       ]);
     }
   });
+
   test('choices with a name of createCopy should have two choices one with name yes the other with no', () => {
     const questions = createCoverQuestions(personalData);
     const createCopy = questions.find((ques) => {

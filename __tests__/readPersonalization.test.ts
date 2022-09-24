@@ -5,13 +5,13 @@ import { readPersonalization } from '../src/readPersonalization';
 const { aboutMe, contactInfo, roles } = tsPersonalization;
 
 describe('readPersonalization', () => {
-  test('It should return one object per file in cvPersonalization', async () => {
+  it('It should return one object per file in cvPersonalization', async () => {
     const fileNames = fs.readdirSync(path.resolve(__dirname, '..', '__mocks__', 'cvPersonalization'));
     const personalData = await readPersonalization();
     expect(personalData && Object.keys(personalData).length).toEqual(fileNames.length);
   });
 
-  test('it should have the same amount of keys in each object as those in the mock', async () => {
+  it('it should have the same amount of keys in each object as those in the mock', async () => {
     const personalData = await readPersonalization();
     if (personalData) {
       const personalDataKeys = Object.keys(personalData);
@@ -19,7 +19,8 @@ describe('readPersonalization', () => {
       expect(personalDataKeys.length).toEqual(tsPersonalizationKeys.length);
     }
   });
-  test('each object in personal data should have as many keys as those in the mock', async () => {
+
+  it('each object in personal data should have as many keys as those in the mock', async () => {
     const personalData = await readPersonalization([__dirname, '..', '__mocks__']);
     if (personalData) {
       const personalDataKeys = Object.keys(personalData);

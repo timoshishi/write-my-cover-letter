@@ -5,6 +5,7 @@ import path from 'path';
 import fs from 'fs';
 describe('deleteDocx', () => {
   jest.spyOn(console, 'error').mockImplementation(() => {});
+
   afterEach(() => {
     // remove all files from the __tests__/test-docs directory
     const testDocsDir = path.resolve(__dirname, 'test-docs');
@@ -13,13 +14,15 @@ describe('deleteDocx', () => {
       fs.unlinkSync(path.join(testDocsDir, file));
     });
   });
-  test("it should handle an error if the docx file doesn't exist", async () => {
+
+  it("it should handle an error if the docx file doesn't exist", async () => {
     try {
       await deleteDocx(path.resolve('test-docs', 'test.docx'), 'personal', 'test');
     } catch (error) {
       expect(error).toBeInstanceOf(Error);
     }
   });
+
   it('should delete a file if the file exists', async () => {
     await writeDocx(
       {

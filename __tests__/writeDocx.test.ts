@@ -12,6 +12,7 @@ describe('writeDocx', () => {
       fs.unlinkSync(path.join(testDocsDir, file));
     });
   });
+
   afterEach(() => {
     // remove all files from the __tests__/test-docs directory
     const testDocsDir = path.resolve(__dirname, 'test-docs');
@@ -21,7 +22,7 @@ describe('writeDocx', () => {
     });
   });
 
-  test('it should write a single file to disk if createCopy is false', async () => {
+  it('it should write a single file to disk if createCopy is false', async () => {
     try {
       const beforeWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
       await writeDocx(
@@ -40,7 +41,7 @@ describe('writeDocx', () => {
     }
   });
 
-  test('it should write two files to disk if createCopy is true', async () => {
+  it('it should write two files to disk if createCopy is true', async () => {
     try {
       const beforeWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
       await writeDocx(
@@ -59,7 +60,7 @@ describe('writeDocx', () => {
     }
   });
 
-  test('it should return text that includes the cvText', async () => {
+  it('it should return text that includes the cvText', async () => {
     const text = await writeDocx(
       {
         personalData,

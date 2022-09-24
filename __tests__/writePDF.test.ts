@@ -24,7 +24,7 @@ describe('writeDocx', () => {
     jest.clearAllMocks();
   });
 
-  test('it should write a single file to disk if createCopy is false', async () => {
+  it('it should write a single file to disk if createCopy is false', async () => {
     await writeDocx(
       {
         personalData,
@@ -49,7 +49,7 @@ describe('writeDocx', () => {
     expect(afterWrite.length).toBe(beforeWrite.length + 1);
   });
 
-  test('it should write two files to disk if createCopy is true', async () => {
+  it('it should write two files to disk if createCopy is true', async () => {
     await writeDocx(
       {
         personalData,
@@ -74,7 +74,7 @@ describe('writeDocx', () => {
     expect(afterWrite.length).toBe(beforeWrite.length + 2);
   });
 
-  test('it should resolve with text of "pdf written"', async () => {
+  it('it should resolve with text of "pdf written"', async () => {
     await writeDocx(
       {
         personalData,
@@ -94,7 +94,8 @@ describe('writeDocx', () => {
     );
     expect(result).toBe('pdf written');
   });
-  test('it should handle an error if libre throws', async () => {
+
+  it('it should handle an error if libre throws', async () => {
     jest.spyOn(libre, 'convert').mockImplementation((file, ex, undefined, callback) => {
       callback(new Error('figlet not found'), Buffer.from(''));
     });
