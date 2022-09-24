@@ -10,6 +10,9 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint"],
+  "paths": {
+    "src": ["src"]
+  },
   "rules": {
     "indent": ["error", 4],
     "linebreak-style": ["error", "unix"],
