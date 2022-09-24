@@ -1,8 +1,14 @@
-import fs from 'fs';
+import fs from 'fs/promises';
+import path from 'path';
+import { formatFilename, formatName } from '../utils';
 
-const deleteDocx = (name: string) => {
-  const formattedName = name.split(' ').join('_');
-  const enterPath = `${formattedName}_cover_letter.docx`;
-  fs.unlinkSync(enterPath);
+const deleteDocx = async (name: string, type: 'personal' | 'companyCopy' = 'personal', writePath: string = '') => {
+  try {
+    const formattedName = formatName(name);
+    const enterPath = formatFilename('docx', formattedName, type);
+    await fs.unlink(path.join(writePath, enterPath));
+  } catch (error) {
+    console.error(error);
+  }
 };
 export default deleteDocx;

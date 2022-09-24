@@ -1,6 +1,8 @@
-import { DefaultStyles, Options } from '../types';
+import { PersonalData, CVText } from '../types';
 import fs from 'fs';
 import { Document, IRunOptions, Packer, Paragraph, TextRun } from 'docx';
+import { DEFAULT_STYLES } from '../constants';
+import { formatFilename, formatName, resolvePathFromCurrentDir } from '../utils';
 
 const doc = new Document();
 
@@ -10,36 +12,33 @@ const createDocxParagraph = (text: string, options: IRunOptions) => {
   });
 };
 
-const writeDocx = (
-  options: Options & {
-    defaultStyles: DefaultStyles;
-    contactInfo: string;
-    roleStr: string;
-    aboutMe: string;
-    closer: string;
-    introPara: string;
-    toWhomItMayConcern: string;
-    name: string;
-  },
-  path = ''
-) => {
-  const { contactInfo, roleStr, aboutMe, closer, introPara, toWhomItMayConcern, name, defaultStyles, copy, company } =
-    options;
+export interface WriteDocxParams {
+  cvText: CVText;
+  createCopy: boolean;
+  personalData: PersonalData;
+  company: string;
+}
 
-  const BASE_PATH = `${path.length ? `${path}/` : ''}`;
-  const formattedName = `${name.split(' ').join('_')}_cover_letter.docx`;
-  const formattedCompany = `${company.split(' ').join('_')}.docx`;
+const writeDocx = ({ cvText, createCopy, personalData, company }: WriteDocxParams, writePath?: string) => {
+  const { contactInfo, roleStr, aboutMe, closer, introPara, toWhomItMayConcern } = cvText;
+  const { name } = personalData.contactInfo;
+
+  const BASE_PATH = resolvePathFromCurrentDir(__dirname, writePath);
+
+  const formattedName = formatFilename('docx', formatName(name), 'personal');
+  const formattedCompany = formatFilename('docx', formatName(company), 'companyCopy');
+
   doc.addSection({
     properties: {},
     children: [
-      createDocxParagraph(toWhomItMayConcern, defaultStyles),
-      createDocxParagraph(introPara, { ...defaultStyles }),
-      createDocxParagraph(aboutMe, { ...defaultStyles, break: 1 }),
-      createDocxParagraph(roleStr, { ...defaultStyles, break: 1 }),
-      createDocxParagraph(closer, { ...defaultStyles, break: 1 }),
-      createDocxParagraph('Best Wishes,', { ...defaultStyles, break: 1 }),
-      createDocxParagraph(name, defaultStyles),
-      createDocxParagraph(contactInfo, defaultStyles),
+      createDocxParagraph(toWhomItMayConcern, DEFAULT_STYLES),
+      createDocxParagraph(introPara, { ...DEFAULT_STYLES }),
+      createDocxParagraph(aboutMe, { ...DEFAULT_STYLES, break: 1 }),
+      createDocxParagraph(roleStr, { ...DEFAULT_STYLES, break: 1 }),
+      createDocxParagraph(closer, { ...DEFAULT_STYLES, break: 1 }),
+      createDocxParagraph('Best Wishes,', { ...DEFAULT_STYLES, break: 1 }),
+      createDocxParagraph(name, DEFAULT_STYLES),
+      createDocxParagraph(contactInfo, DEFAULT_STYLES),
     ],
   });
 
@@ -47,10 +46,11 @@ const writeDocx = (
     Packer.toBuffer(doc)
       .then((buffer: Buffer) => {
         fs.writeFileSync(`${BASE_PATH}${formattedName}`, buffer);
-        if (copy) {
+        if (createCopy) {
           fs.writeFileSync(`${BASE_PATH}${formattedCompany}`, buffer);
         }
-        resolve('written');
+        // for unit testing
+        resolve(JSON.stringify(cvText));
       })
       .catch((err: unknown) => reject(err));
   });

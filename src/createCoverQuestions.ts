@@ -1,5 +1,5 @@
 import { PersonalData } from './types';
-
+import { INDUSTRIES } from './constants';
 export const createCoverQuestions = (personalData: PersonalData) => {
   return [
     {
@@ -22,7 +22,7 @@ export const createCoverQuestions = (personalData: PersonalData) => {
       type: 'list',
       name: 'industry',
       message: 'Enter the industry the company operates in',
-      choices: Object.keys(personalData.industries),
+      choices: Object.keys(INDUSTRIES),
     },
     {
       type: 'input',
@@ -46,7 +46,7 @@ export const createCoverQuestions = (personalData: PersonalData) => {
     },
     {
       type: 'confirm',
-      name: 'copy',
+      name: 'createCopy',
       message: "Would you like to make a copy with the company's name?",
       default: true,
     },

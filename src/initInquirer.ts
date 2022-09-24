@@ -1,31 +1,39 @@
 import inquirer from 'inquirer';
 import { createCoverQuestions } from './createCoverQuestions';
-import searchJobs from './getJobURLs';
 import { createHeader } from './createHeader';
-import readPersonalization from './readPersonalization';
+import { readPersonalization } from './readPersonalization';
+import { TextResponses } from './types';
 import { writeFiles } from './writeDocs/writeFiles';
 
 const initInquirer = async () => {
   try {
     await createHeader();
-    const initialQuestions = await inquirer.prompt([
-      {
-        type: 'list',
-        name: 'initial',
-        message: 'Would you like to write a cover letter or search for recent job listings?',
-        choices: ['Write a cover letter', 'Search Jobs (Open recent Hacker News jobs in browser)'],
-      },
-    ]);
-    if (initialQuestions.initial === 'Search Jobs') {
-      searchJobs();
-    } else {
-      let personalData = readPersonalization();
-      const coverQuestions = createCoverQuestions(personalData);
 
-      const options = await inquirer.prompt(coverQuestions);
-      // console.log(options);
-      await writeFiles({ ...options, personalData });
+    const personalData = await readPersonalization();
+    if (!personalData) {
+      throw new Error('No personal data found');
     }
+    const coverQuestions = createCoverQuestions(personalData);
+
+    const { outputTypes, createCopy, ...textResponses } = await inquirer.prompt(coverQuestions);
+    const result: TextResponses = textResponses;
+    // assign defaults to the text responses for testing purposes
+    if (process.env.NODE_ENV !== 'production') {
+      for (const key in result) {
+        result[key] =
+          result[key] ||
+          {
+            company: 'Awesome Company',
+            position: 'WORKER BEE',
+            industry: 'generic',
+            skills: 'Skill, Skill and Skill',
+            intro: "I'm interested in the company because...",
+          }[key];
+      }
+    }
+
+    await writeFiles({ textResponses: result, outputTypes, createCopy, personalData });
+    return 'files written';
   } catch (err) {
     console.error(err);
   }

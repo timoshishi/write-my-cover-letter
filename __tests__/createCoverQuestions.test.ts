@@ -1,47 +1,38 @@
 import { createCoverQuestions } from '../src/createCoverQuestions';
-import { PersonalData } from '../src/types';
+import { personalData } from '../__mocks__';
 
-const personalData = {
-  roles: { brasco: 'donnie', vito: 'genovese' },
-  industries: {
-    fisheries: 'pescado',
-    moneyMaking: 'dollars',
-    interrogation: 'ask nicely',
-  },
-};
-
-const questions = createCoverQuestions(personalData as unknown as PersonalData);
-test('it should return an array', () => {
-  expect(Array.isArray(questions)).toEqual(true);
-});
-
-test('role should be a length of 2', () => {
-  const roleLength = questions.reduce((len, ques) => {
-    if (ques.name === 'role') {
-      len = ques?.choices?.length ?? 0;
-      return len;
-    } else {
-      return len;
-    }
-  }, 0);
-  expect(roleLength).toEqual(2);
-});
-
-test('industry should be a length of 3', () => {
-  const roleLength = questions.reduce((len, ques) => {
-    if (ques.name === 'industry') {
-      len = ques?.choices?.length ?? 0;
-      return len;
-    } else {
-      return len;
-    }
-  }, 0);
-  expect(roleLength).toEqual(3);
-});
-
-test('all questions in array should have a type, name and message property', () => {
-  const hasAllProps = questions.every((ques) => {
-    return ques.hasOwnProperty('type') && ques.hasOwnProperty('name') && ques.hasOwnProperty('message');
+describe('createCoverQuestions', () => {
+  test('it should return an array', () => {
+    const questions = createCoverQuestions(personalData);
+    expect(Array.isArray(questions)).toEqual(true);
   });
-  expect(hasAllProps).toEqual(true);
+
+  test('all questions in array should have a type, name and message property', () => {
+    const questions = createCoverQuestions(personalData);
+    const hasAllProps = questions.every((ques) => {
+      return ques.hasOwnProperty('type') && ques.hasOwnProperty('name') && ques.hasOwnProperty('message');
+    });
+    expect(hasAllProps).toEqual(true);
+  });
+  test('choices with a name of outputTypes should have two choices one with name docx the other with pdf', () => {
+    const questions = createCoverQuestions(personalData);
+    const outputTypes = questions.find((ques) => {
+      return ques.name === 'outputTypes';
+    });
+    expect(outputTypes).not.toBeUndefined();
+    if (outputTypes) {
+      expect(outputTypes.choices).toEqual([
+        { name: 'docx', checked: true },
+        { name: 'pdf', checked: false },
+      ]);
+    }
+  });
+  test('choices with a name of createCopy should have two choices one with name yes the other with no', () => {
+    const questions = createCoverQuestions(personalData);
+    const createCopy = questions.find((ques) => {
+      return ques.name === 'createCopy';
+    });
+    expect(createCopy).not.toBeUndefined();
+    expect(createCopy?.default).toEqual(true);
+  });
 });
