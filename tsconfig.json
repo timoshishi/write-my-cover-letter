@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    /* Visit https://aka.ms/tsconfig.json to read more about this file */
     "outDir": "./build",
 
     /* Language and Environment */
-    "target": "ESNext",
+    "target": "ES6",
     "noEmit": true,
-
+    "module": "CommonJS",
     /* Modules */
     "rootDir": "." /* Specify the root folder within your source files. */,
 
@@ -21,6 +20,7 @@
     "declaration": true /* Generate .d.ts files from TypeScript and JavaScript files in your project. */,
 
     /* Interop Constraints */
+    "esModuleInterop": true,
     "isolatedModules": true /* Ensure that each file can be safely transpiled without relying on other imports. */,
     "allowSyntheticDefaultImports": true /* Allow 'import x from y' when a module doesn't have a default export. */,
     "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
@@ -31,6 +31,6 @@
 
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
-  "include": ["src/**/*"] /* Specify the list of files to be included. */,
+  "include": ["src/**/*", "cbPersonalization/**/*"] /* Specify the list of files to be included. */,
   "exclude": ["**/types/*", "__mocks__", "__tests__/**/*"]
 }

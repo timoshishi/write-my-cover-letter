@@ -3,6 +3,5 @@ node_modules/
 *.docx*
 *.pdf
 coverage/
-build/
 package-lock.json
 *.tgz
