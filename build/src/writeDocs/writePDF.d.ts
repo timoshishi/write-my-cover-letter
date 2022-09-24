@@ -1,6 +1,6 @@
-declare const writePDF: ({ name, company, copy, }: {
+declare const writePDF: ({ name, company, createCopy, }: {
     name: string;
     company: string;
-    copy: boolean;
+    createCopy: boolean;
 }, path?: string) => Promise<unknown>;
 export default writePDF;

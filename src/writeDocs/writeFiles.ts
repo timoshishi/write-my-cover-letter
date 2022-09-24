@@ -3,6 +3,7 @@ import deleteDocx from './deleteDocx';
 import writeDocx from './writeDocx';
 import writePdf from './writePDF';
 import { TextResponses, PersonalData } from '../types';
+import { resolvePathFromCurrentDir } from '../utils';
 
 export interface WriteFilesParams {
   textResponses: TextResponses;
@@ -13,12 +14,13 @@ export interface WriteFilesParams {
 
 export const writeFiles = async (
   { textResponses, outputTypes, createCopy, personalData }: WriteFilesParams,
-  testPath?: string
+  writePath?: string
 ) => {
   const cvText = generateParagraphs({ textResponses, personalData });
+  const WRITE_PATH = resolvePathFromCurrentDir(__dirname, writePath);
 
   try {
-    await writeDocx({ createCopy, cvText, personalData, company: textResponses.company }, testPath);
+    await writeDocx({ createCopy, cvText, personalData, company: textResponses.company }, WRITE_PATH);
 
     if (outputTypes.includes('pdf')) {
       await writePdf(
@@ -27,11 +29,11 @@ export const writeFiles = async (
           company: textResponses.company,
           createCopy: createCopy,
         },
-        testPath
+        writePath
       );
     }
     if (!outputTypes.includes('docx')) {
-      deleteDocx(personalData.contactInfo.name, testPath);
+      deleteDocx(personalData.contactInfo.name, WRITE_PATH);
     }
   } catch (err) {
     console.error(err);

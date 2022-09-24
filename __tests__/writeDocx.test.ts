@@ -1,24 +1,6 @@
-import { generateParagraphs } from '../src/generateParagraphs';
 import writeDocx from '../src/writeDocs/writeDocx';
 import path from 'path';
 import fs from 'fs';
-
-import readPersonalization from '../src/readPersonalization';
-import { Options } from '../src/types';
-const options = {
-  industry: 'generic',
-  company: 'RED ALERT',
-  position: 'FULL STACK',
-  role: 'frontend',
-  intro: 'Here is a thing that I have been doing lately',
-  contact: 'yello',
-  personalData: readPersonalization(),
-  copy: false,
-  name: 'awesome',
-} as unknown as Options;
-const paras = generateParagraphs({
-  ...options,
-});
 
 const fileName = `${paras.name.split(' ').join('_')}_cover_letter.docx`;
 

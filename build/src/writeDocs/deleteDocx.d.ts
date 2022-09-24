@@ -1,2 +1,2 @@
-declare const deleteDocx: (name: string) => void;
+declare const deleteDocx: (name: string, testPath?: string) => void;
 export default deleteDocx;

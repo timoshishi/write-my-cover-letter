@@ -1,7 +1,8 @@
 import { PersonalData, CVText } from '../types';
 import fs from 'fs';
 import { Document, IRunOptions, Packer, Paragraph, TextRun } from 'docx';
-import { DEFAULT_STYLES } from '../../src/constants';
+import { DEFAULT_STYLES } from '../constants';
+import { formatFilename, formatName, resolvePathFromCurrentDir } from '../utils';
 
 const doc = new Document();
 
@@ -18,13 +19,15 @@ export interface WriteDocxParams {
   company: string;
 }
 
-const writeDocx = ({ cvText, createCopy, personalData, company }: WriteDocxParams, testPath?: string) => {
+const writeDocx = ({ cvText, createCopy, personalData, company }: WriteDocxParams, writePath?: string) => {
   const { contactInfo, roleStr, aboutMe, closer, introPara, toWhomItMayConcern } = cvText;
   const { name } = personalData.contactInfo;
 
-  const BASE_PATH = `${testPath?.length ? `${testPath}/` : ''}`;
-  const formattedName = `${name.split(' ').join('_')}_cover_letter.docx`;
-  const formattedCompany = `${company.split(' ').join('_')}.docx`;
+  const BASE_PATH = resolvePathFromCurrentDir(__dirname, writePath);
+
+  const formattedName = formatFilename('docx', formatName(name), 'personal');
+  const formattedCompany = formatFilename('docx', formatName(company), 'companyCopy');
+
   doc.addSection({
     properties: {},
     children: [
@@ -47,6 +50,7 @@ const writeDocx = ({ cvText, createCopy, personalData, company }: WriteDocxParam
           fs.writeFileSync(`${BASE_PATH}${formattedCompany}`, buffer);
         }
         // for unit testing
+        console.log(BASE_PATH);
         resolve(JSON.stringify(cvText));
       })
       .catch((err: unknown) => reject(err));
