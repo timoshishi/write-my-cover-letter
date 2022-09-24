@@ -1,6 +1,6 @@
 {
   "name": "write-my-cover-letter",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "",
   "main": "./bin/index.js",
   "bin": {
@@ -10,7 +10,8 @@
     "bin",
     "build/cvPersonalization",
     "build/index.js",
-    "fonts"
+    "fonts",
+    "cvPersonalization"
   ],
   "scripts": {
     "test": "jest --runInBand",
@@ -21,7 +22,6 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-json": "^4.1.0",
