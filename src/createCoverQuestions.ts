@@ -1,5 +1,6 @@
 import { PersonalData } from './types';
 import { INDUSTRIES } from './constants';
+
 export const createCoverQuestions = (personalData: PersonalData) => {
   return [
     {
