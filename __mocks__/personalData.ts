@@ -7,9 +7,7 @@ export const personalData: PersonalData = {
     phone: '555-555-5555',
     sites: ['https://johndoe.com', 'linkedin.com'],
   },
-  aboutMe: {
-    aboutMe: 'I am a person who does things',
-  },
+  personalIntro: 'I am a person who does things',
   roles: {
     frontend: 'I am a frontend developer',
     backend: 'I am a backend developer',

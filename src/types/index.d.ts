@@ -1,11 +1,11 @@
 export interface PersonalData {
-  aboutMe: AboutMe;
+  personalIntro: string;
   contactInfo: ContactInfo;
   roles: Roles;
 }
 
-export interface AboutMe {
-  aboutMe: string;
+export interface PersonalIntro {
+  personalIntro: string;
 }
 
 export interface ContactInfo {
@@ -55,6 +55,6 @@ export interface CVText {
   contactInfo: string;
   roleStr: string;
   toWhomItMayConcern: string;
-  aboutMe: string;
+  personalIntro: string;
   closer: string;
 }

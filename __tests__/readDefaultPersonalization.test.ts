@@ -26,7 +26,7 @@ describe('readDefaultPersonalization', () => {
       const personalDataKeys = Object.keys(personalData);
       const tsPersonalizationKeys = Object.keys(defaultPersonalization);
       expect(personalDataKeys.length).toEqual(tsPersonalizationKeys.length);
-      expect(personalData.aboutMe.aboutMe.length).toEqual(defaultPersonalization.aboutMe.length);
+      expect(personalData.personalIntro.length).toEqual(defaultPersonalization.personalIntro.length);
       expect(personalData.contactInfo.email.length).toEqual(defaultPersonalization.contactInfo.email.length);
       expect(Object.keys(personalData.contactInfo).length).toEqual(
         Object.keys(defaultPersonalization.contactInfo).length
@@ -41,7 +41,7 @@ describe('readDefaultPersonalization', () => {
       const personalDataKeys = Object.keys(personalData);
       const tsPersonalizationKeys = Object.keys(defaultPersonalization);
       expect(personalDataKeys.length).toEqual(tsPersonalizationKeys.length);
-      expect(personalData.aboutMe.aboutMe.length).toEqual(defaultPersonalization.aboutMe.length);
+      expect(personalData.personalIntro.length).toEqual(defaultPersonalization.personalIntro.length);
       expect(personalData.contactInfo.email.length).toEqual(defaultPersonalization.contactInfo.email.length);
       expect(Object.keys(personalData.contactInfo).length).toEqual(
         Object.keys(defaultPersonalization.contactInfo).length
@@ -56,7 +56,7 @@ describe('readDefaultPersonalization', () => {
       const personalDataKeys = Object.keys(personalData);
       const tsPersonalizationKeys = Object.keys(defaultPersonalization);
       expect(personalDataKeys.length).toEqual(tsPersonalizationKeys.length);
-      expect(personalData.aboutMe.aboutMe).toHaveLength(defaultPersonalization.aboutMe.length);
+      expect(personalData.personalIntro).toHaveLength(defaultPersonalization.personalIntro.length);
       expect(personalData.contactInfo.email).toHaveLength(defaultPersonalization.contactInfo.email.length);
       expect(Object.keys(personalData.contactInfo)).toHaveLength(
         Object.keys(defaultPersonalization.contactInfo).length
@@ -67,7 +67,7 @@ describe('readDefaultPersonalization', () => {
 
   it('should handle errors', async () => {
     expect(
-      await readDefaultPersonalization([__dirname, '..', '__mocks__', 'defaultPersonalization', 'aboutMe'])
+      await readDefaultPersonalization([__dirname, '..', '__mocks__', 'defaultPersonalization', 'personalIntro'])
     ).toBeUndefined();
   });
 });

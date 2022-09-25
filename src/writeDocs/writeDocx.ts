@@ -20,7 +20,7 @@ export interface WriteDocxParams {
 }
 
 const writeDocx = ({ cvText, createCopy, personalData, company }: WriteDocxParams, writePath?: string) => {
-  const { contactInfo, roleStr, aboutMe, closer, introPara, toWhomItMayConcern } = cvText;
+  const { contactInfo, roleStr, personalIntro, closer, introPara, toWhomItMayConcern } = cvText;
   const { name } = personalData.contactInfo;
 
   const BASE_PATH = resolvePathFromCurrentDir(__dirname, writePath);
@@ -33,7 +33,7 @@ const writeDocx = ({ cvText, createCopy, personalData, company }: WriteDocxParam
     children: [
       createDocxParagraph(toWhomItMayConcern, DEFAULT_STYLES),
       createDocxParagraph(introPara, { ...DEFAULT_STYLES }),
-      createDocxParagraph(aboutMe, { ...DEFAULT_STYLES, break: 1 }),
+      createDocxParagraph(personalIntro, { ...DEFAULT_STYLES, break: 1 }),
       createDocxParagraph(roleStr, { ...DEFAULT_STYLES, break: 1 }),
       createDocxParagraph(closer, { ...DEFAULT_STYLES, break: 1 }),
       createDocxParagraph('Best Wishes,', { ...DEFAULT_STYLES, break: 1 }),
