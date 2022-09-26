@@ -1,8 +1,9 @@
 import inquirer, { Question } from 'inquirer';
-import { PersonalData, Roles } from './types';
+import { PersonalData, Roles } from '../types';
 import path from 'path';
 import fs from 'fs';
-import { readPersonalization } from './readPersonalization';
+import { readPersonalization } from '../readPersonalization';
+import { updateContactInfo } from './updateContactInfo';
 
 export const updatePersonalIntro = (personalIntro: string) => async (): Promise<{ personalIntro: string }> => {
   const response: {
@@ -89,8 +90,8 @@ export const personalizationChoices = [
     name: 'personalization',
     message: 'Select an option to personalize',
     choices: [
+      { name: 'Update your contact info', value: 'contactInfo' },
       { name: 'Update personal intro', value: 'personalIntro' },
-      // { name: 'Update your contact info', value: 'contactInfo' },
       { name: 'Update a role with some information about a project you have completed', value: 'roles' },
       { name: 'Go back to complete your cover letter', value: 'exit' },
     ],
@@ -105,7 +106,9 @@ export const createPersonalizedDataQuestions = async (personalData: PersonalData
     const fn = {
       roles: updateRoles(personalData.roles),
       personalIntro: updatePersonalIntro(personalData.personalIntro),
+      contactInfo: updateContactInfo(personalData.contactInfo),
     }[answer.personalization];
+
     await fn();
     const updatedPersonalData = await readPersonalization();
     if (!updatedPersonalData) {

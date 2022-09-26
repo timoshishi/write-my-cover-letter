@@ -8,7 +8,7 @@ import { hasFilledPersonalData } from './hasFilledPersonalData';
 import { readDefaultPersonalization, readPersonalization } from './readPersonalization';
 import { PersonalData, TextResponses } from './types';
 import { writeFiles } from './writeDocs/writeFiles';
-import { createPersonalizedDataQuestions } from './updateDataQuestions';
+import { createPersonalizedDataQuestions } from './updateData/updateDataQuestions';
 import { applyDefaultPersonalizationData } from './applyDefaultPersonalData';
 
 const initInquirer = async () => {

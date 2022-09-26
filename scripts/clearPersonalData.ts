@@ -1,4 +1,4 @@
-import { writeJSONToDisk } from '../src/updateDataQuestions';
+import { writeJSONToDisk } from '../src/updateData/updateDataQuestions';
 
 (async () => {
   await writeJSONToDisk('personalIntro', { personalIntro: '' }, 'cvPersonalization');

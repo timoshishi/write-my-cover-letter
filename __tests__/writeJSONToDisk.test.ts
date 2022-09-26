@@ -1,5 +1,5 @@
-import { ContactInfo, Roles } from '../src/types';
-import { writeJSONToDisk } from '../src/updateDataQuestions';
+import { ContactInfo } from '../src/types';
+import { writeJSONToDisk } from '../src/updateData/updateDataQuestions';
 import { resolvePathFromCurrentDir } from '../src/utils';
 import { clearTestDocsDir } from '../test-utils';
 import fs from 'fs';
@@ -12,7 +12,8 @@ describe('writeJSONToDisk', () => {
   afterEach(() => {
     clearTestDocsDir();
   });
-  test('it should return a promise', () => {
+
+  it('it should return a promise', () => {
     expect(
       writeJSONToDisk<'contactInfo'>(
         'contactInfo',
