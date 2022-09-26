@@ -1,7 +1,8 @@
-import inquirer, { Question, QuestionCollection } from 'inquirer';
+import inquirer, { Question } from 'inquirer';
 import { PersonalData, Roles } from './types';
 import path from 'path';
 import fs from 'fs';
+import { readPersonalization } from './readPersonalization';
 
 export const updatePersonalIntro = (personalIntro: string) => async (): Promise<{ personalIntro: string }> => {
   const response: {
@@ -14,8 +15,11 @@ export const updatePersonalIntro = (personalIntro: string) => async (): Promise<
       default: personalIntro,
     },
   ]);
-
-  return { personalIntro: response.personalIntro };
+  const responseObj = {
+    personalIntro: response.personalIntro,
+  };
+  await writeJSONToDisk('personalIntro', responseObj, 'cvPersonalization');
+  return responseObj;
 };
 
 export const createInitialRolesListQuestions = (roles: Roles): Question[] =>
@@ -62,17 +66,19 @@ export const updateRoles = (roles) => async () => {
       },
     ]);
 
-    return { ...roles, [newRole]: newRoleDescription };
+    const updatedRoles = { ...roles, [newRole]: newRoleDescription };
+    await writeJSONToDisk('roles', updatedRoles, 'cvPersonalization');
+    return updatedRoles;
   } else {
     const roleDescription = await inquirer.prompt({
       type: 'input',
       name: 'roleDescription',
-      message: 'What is the description of the new role?',
+      message: `What is the new description for ${responses.roles}?`,
       default: roles[responses.roles],
     });
 
     const updatedRoles = { ...roles, [responses.roles]: roleDescription.roleDescription };
-    console.log('updatedRoles', JSON.stringify(updatedRoles, null, 2));
+    await writeJSONToDisk('roles', updatedRoles, 'cvPersonalization');
     return updatedRoles;
   }
 };
@@ -100,15 +106,18 @@ export const createPersonalizedDataQuestions = async (personalData: PersonalData
       roles: updateRoles(personalData.roles),
       personalIntro: updatePersonalIntro(personalData.personalIntro),
     }[answer.personalization];
-    const fnRes = await fn();
-
-    await createPersonalizedDataQuestions(personalData);
+    await fn();
+    const updatedPersonalData = await readPersonalization();
+    if (!updatedPersonalData) {
+      throw new Error('Could not read personalization');
+    }
+    await createPersonalizedDataQuestions(updatedPersonalData);
   }
 };
 
 export const writeJSONToDisk = async <T extends keyof PersonalData>(
   key: T,
-  personalData: PersonalData[T],
+  personalData: PersonalData[T] | { personalIntro: string },
   writePath: string
 ) => {
   const json = JSON.stringify(personalData);

@@ -16,3 +16,10 @@ export declare const INDUSTRIES: {
     education: string;
     consulting: string;
 };
+export declare const DEFAULT_RESPONSES: {
+    company: string;
+    position: string;
+    industry: string;
+    skills: string;
+    intro: string;
+};

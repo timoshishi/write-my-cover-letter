@@ -15,7 +15,7 @@ const initInquirer = async () => {
   try {
     const header = readFileSync(path.resolve(__dirname, 'header.txt'), 'utf8');
     console.log(header);
-    let finalData: PersonalData;
+    let finalData: PersonalData | void;
     const personalData = await readPersonalization();
     if (!personalData) {
       throw new Error('No personal data found');
@@ -28,12 +28,14 @@ const initInquirer = async () => {
       await createPersonalizedDataQuestions(personalData);
     }
 
-    if (!hasPersonalData) {
-      const defaultPersonalizationData = await readDefaultPersonalization();
-      finalData = applyDefaultPersonalizationData(personalData, defaultPersonalizationData!);
-    } else {
-      finalData = personalData;
+    finalData = await readPersonalization();
+    const defaultPersonalizationData = await readDefaultPersonalization();
+    finalData = applyDefaultPersonalizationData(personalData, defaultPersonalizationData!);
+
+    if (!finalData) {
+      throw new Error('No personal data found');
     }
+
     const coverQuestions = createCoverQuestions(finalData);
 
     const { outputTypes, createCopy, ...textResponses } = await inquirer.prompt(coverQuestions);
