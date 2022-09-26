@@ -18,7 +18,8 @@
     "test:coverage": "jest --runInBand --coverage",
     "start": "ts-node src/index.ts",
     "build": "rollup -c rollup.config.js",
-    "postbuild": "ts-node ./scripts/postbuild.ts"
+    "postbuild": "ts-node ./scripts/postbuild.ts",
+    "clear-data": "ts-node ./scripts/clearPersonalData.ts"
   },
   "keywords": [],
   "author": "",
