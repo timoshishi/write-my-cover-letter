@@ -11,7 +11,8 @@
     "build/cvPersonalization",
     "build/index.js",
     "fonts",
-    "cvPersonalization"
+    "cvPersonalization",
+    "defaultPersonalization"
   ],
   "scripts": {
     "test": "jest --runInBand",
