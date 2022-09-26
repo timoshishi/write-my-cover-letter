@@ -106,15 +106,6 @@ export const createPersonalizedDataQuestions = async (personalData: PersonalData
   }
 };
 
-export const questionLoop = async () => {
-  const answer: QuestionCollection = await inquirer.prompt(personalizationChoices);
-  if (answer === 'back') {
-    return;
-  } else {
-    await questionLoop();
-  }
-};
-
 export const writeJSONToDisk = async <T extends keyof PersonalData>(
   key: T,
   personalData: PersonalData[T],
