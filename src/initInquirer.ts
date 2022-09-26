@@ -20,10 +20,12 @@ const initInquirer = async () => {
     }
     const hasPersonalData = hasFilledPersonalData(personalData);
     const { shouldUpdate } = await inquirer.prompt(checkIfShouldUpdate(hasPersonalData));
+
     if (shouldUpdate) {
       console.log('Please fill out the following questions to update your personal data');
       await createPersonalizedDataQuestions(personalData);
     }
+
     if (!hasPersonalData) {
       const defaultPersonalizationData = await readDefaultPersonalization();
       finalData = applyDefaultPersonalizationData(personalData, defaultPersonalizationData!);
@@ -42,6 +44,7 @@ const initInquirer = async () => {
   } catch (err) {
     console.error(err);
     console.log("WE HAVE FAILED YOU! WE'RE SORRY!");
+    process.exit(1);
   }
 };
 

@@ -4,15 +4,14 @@ import path from 'path';
 import { WriteFilesParams } from '../src/writeDocs/writeFiles';
 import { personalData, cvText, textResponses } from '../__mocks__';
 import { formatName } from '../src/utils';
+import { clearTestDocsDir } from '../test-utils';
 
 describe('writeFiles', () => {
+  beforeEach(() => {
+    clearTestDocsDir();
+  });
   afterEach(() => {
-    // remove all files from the __tests__/test-docs directory
-    const testDocsDir = path.resolve(__dirname, 'test-docs');
-    const files = fs.readdirSync(testDocsDir);
-    files.forEach((file) => {
-      fs.unlinkSync(path.join(testDocsDir, file));
-    });
+    clearTestDocsDir();
   });
 
   it('it should reject if no values are passed', async () => {
