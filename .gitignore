@@ -1,8 +1,8 @@
 node_modules/
-*.txt
 *.docx*
 *.pdf
 coverage/
 package-lock.json
 *.tgz
 .env*
+build/src/
