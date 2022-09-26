@@ -1,31 +1,11 @@
-export interface Options {
-  company: string;
-  position: string;
-  role: keyof Roles;
-  industry: keyof Industries;
-  intro: string;
-  skills: string;
-  outputTypes: string[];
-  createCopy: boolean;
-  personalData: PersonalData;
-  industries: Industries;
-  company: string;
-  position: string;
-  role: string;
-  value?: string;
-  intro: string;
-  contact: string;
-  skills: string;
-}
-
 export interface PersonalData {
-  aboutMe: AboutMe;
+  personalIntro: string;
   contactInfo: ContactInfo;
   roles: Roles;
 }
 
-export interface AboutMe {
-  aboutMe: string;
+export interface PersonalIntro {
+  personalIntro: string;
 }
 
 export interface ContactInfo {
@@ -75,6 +55,6 @@ export interface CVText {
   contactInfo: string;
   roleStr: string;
   toWhomItMayConcern: string;
-  aboutMe: string;
+  personalIntro: string;
   closer: string;
 }

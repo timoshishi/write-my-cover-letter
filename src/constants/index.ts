@@ -25,3 +25,11 @@ export const INDUSTRIES = {
   consulting:
     '${company} has a stellar reputation of innovation and opportunities to software engineers of all stripes and I would love to be selected for a role with your company. I am impressed with quality engineering that ${company} has put forth to make it a leader in consulting and opportunities in the tech field and would love to face the unique and interesting challenges that your engineers encounter.',
 };
+
+export const DEFAULT_RESPONSES = {
+  company: 'Awesome Company',
+  position: 'WORKER BEE',
+  industry: 'generic',
+  skills: 'Skill, Skill and Skill',
+  intro: "I'm interested in the company because...",
+};

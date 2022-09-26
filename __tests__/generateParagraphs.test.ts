@@ -21,7 +21,7 @@ describe('generateParagraphs', () => {
     expect(cvText).toHaveProperty('toWhomItMayConcern');
     expect(cvText).toHaveProperty('introPara');
     expect(cvText).toHaveProperty('roleStr');
-    expect(cvText).toHaveProperty('aboutMe');
+    expect(cvText).toHaveProperty('personalIntro');
     expect(cvText).toHaveProperty('closer');
     expect(cvText).toHaveProperty('contactInfo');
   });
@@ -49,11 +49,11 @@ describe('generateParagraphs', () => {
     expect(cvText.roleStr).toBe('I am a frontend developer');
   });
 
-  it('it should return the correct text for aboutMe', () => {
-    const { aboutMe } = generateParagraphs(generateParagraphsOptions);
-    expect(aboutMe.startsWith(personalData.aboutMe.aboutMe)).toBeTruthy();
-    expect(aboutMe.includes(textResponses.company)).toBeTruthy();
-    expect(aboutMe.includes('culture')).toBeTruthy();
+  it('it should return the correct text for personalIntro', () => {
+    const { personalIntro } = generateParagraphs(generateParagraphsOptions);
+    expect(personalIntro.startsWith(personalData.personalIntro)).toBeTruthy();
+    expect(personalIntro.includes(textResponses.company)).toBeTruthy();
+    expect(personalIntro.includes('culture')).toBeTruthy();
   });
 
   it('it should return the correct text for closer', () => {

@@ -1,41 +1,50 @@
 import inquirer from 'inquirer';
+import { applyDefaultResponses } from './applyDefaultResponses';
 import { createCoverQuestions } from './createCoverQuestions';
 import { createHeader } from './createHeader';
-import { readPersonalization } from './readPersonalization';
-import { TextResponses } from './types';
+import { checkIfShouldUpdate } from './checkIfShouldUpdate';
+import { hasFilledPersonalData } from './hasFilledPersonalData';
+import { readDefaultPersonalization, readPersonalization } from './readPersonalization';
+import { PersonalData, TextResponses } from './types';
 import { writeFiles } from './writeDocs/writeFiles';
+import { createPersonalizedDataQuestions } from './updateDataQuestions';
+import { applyDefaultPersonalizationData } from './applyDefaultPersonalData';
 
 const initInquirer = async () => {
   try {
     await createHeader();
-
+    let finalData: PersonalData;
     const personalData = await readPersonalization();
     if (!personalData) {
       throw new Error('No personal data found');
     }
-    const coverQuestions = createCoverQuestions(personalData);
+    const hasPersonalData = hasFilledPersonalData(personalData);
+    const { shouldUpdate } = await inquirer.prompt(checkIfShouldUpdate(hasPersonalData));
+
+    if (shouldUpdate) {
+      console.log('Please fill out the following questions to update your personal data');
+      await createPersonalizedDataQuestions(personalData);
+    }
+
+    if (!hasPersonalData) {
+      const defaultPersonalizationData = await readDefaultPersonalization();
+      finalData = applyDefaultPersonalizationData(personalData, defaultPersonalizationData!);
+    } else {
+      finalData = personalData;
+    }
+    const coverQuestions = createCoverQuestions(finalData);
 
     const { outputTypes, createCopy, ...textResponses } = await inquirer.prompt(coverQuestions);
     const result: TextResponses = textResponses;
     // assign defaults to the text responses for testing purposes
-    if (process.env.NODE_ENV !== 'production') {
-      for (const key in result) {
-        result[key] =
-          result[key] ||
-          {
-            company: 'Awesome Company',
-            position: 'WORKER BEE',
-            industry: 'generic',
-            skills: 'Skill, Skill and Skill',
-            intro: "I'm interested in the company because...",
-          }[key];
-      }
-    }
+    const textResponsesWithDefaults = applyDefaultResponses(result);
 
-    await writeFiles({ textResponses: result, outputTypes, createCopy, personalData });
+    await writeFiles({ textResponses: textResponsesWithDefaults, outputTypes, createCopy, personalData });
     return 'files written';
   } catch (err) {
     console.error(err);
+    console.log("WE HAVE FAILED YOU! WE'RE SORRY!");
+    process.exit(1);
   }
 };
 

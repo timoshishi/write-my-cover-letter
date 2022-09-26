@@ -2,24 +2,14 @@ import writeDocx from '../src/writeDocs/writeDocx';
 import path from 'path';
 import fs from 'fs';
 import { personalData, cvText } from '../__mocks__';
+import { clearTestDocsDir } from '../test-utils';
 
 describe('writeDocx', () => {
   beforeEach(() => {
-    // remove all files from the __tests__/test-docs directory
-    const testDocsDir = path.resolve(__dirname, 'test-docs');
-    const files = fs.readdirSync(testDocsDir);
-    files.forEach((file) => {
-      fs.unlinkSync(path.join(testDocsDir, file));
-    });
+    clearTestDocsDir();
   });
-
   afterEach(() => {
-    // remove all files from the __tests__/test-docs directory
-    const testDocsDir = path.resolve(__dirname, 'test-docs');
-    const files = fs.readdirSync(testDocsDir);
-    files.forEach((file) => {
-      fs.unlinkSync(path.join(testDocsDir, file));
-    });
+    clearTestDocsDir();
   });
 
   it('it should write a single file to disk if createCopy is false', async () => {
