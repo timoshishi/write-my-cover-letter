@@ -1,7 +1,8 @@
 import inquirer from 'inquirer';
 import { applyDefaultResponses } from './applyDefaultResponses';
 import { createCoverQuestions } from './createCoverQuestions';
-import { createHeader } from './createHeader';
+import { readFileSync } from 'fs';
+import path from 'path';
 import { checkIfShouldUpdate } from './checkIfShouldUpdate';
 import { hasFilledPersonalData } from './hasFilledPersonalData';
 import { readDefaultPersonalization, readPersonalization } from './readPersonalization';
@@ -12,7 +13,8 @@ import { applyDefaultPersonalizationData } from './applyDefaultPersonalData';
 
 const initInquirer = async () => {
   try {
-    await createHeader();
+    const header = readFileSync(path.resolve(__dirname, 'header.txt'), 'utf8');
+    console.log(header);
     let finalData: PersonalData;
     const personalData = await readPersonalization();
     if (!personalData) {
