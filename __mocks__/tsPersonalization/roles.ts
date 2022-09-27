@@ -1,5 +1,1 @@
-export const roles = {
-  frontend: '',
-  fullstack: '',
-  backend: '',
-};
+export const roles = {};
