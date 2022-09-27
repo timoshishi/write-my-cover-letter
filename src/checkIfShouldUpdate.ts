@@ -1,9 +1,6 @@
 import { ListQuestion } from 'inquirer';
 
-export const checkIfShouldUpdate = (hasPersonalData: boolean): ListQuestion => {
-  if (!hasPersonalData) {
-    console.log("Hey, you haven't filled out your personal data yet!");
-  }
+export const checkIfShouldUpdate = (): ListQuestion => {
   return {
     type: 'list',
     name: 'shouldUpdate',

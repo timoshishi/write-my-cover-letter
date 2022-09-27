@@ -35,12 +35,7 @@ export interface Industries {
   consulting: string;
 }
 
-export interface Roles {
-  fullstack: string;
-  frontend: string;
-  backend: string;
-}
-
+export interface Roles extends Record<string, string> {}
 export interface TextResponses {
   company: string;
   position: string;
@@ -58,3 +53,5 @@ export interface CVText {
   personalIntro: string;
   closer: string;
 }
+
+export type OutputTypes = ('pdf' | 'docx')[];

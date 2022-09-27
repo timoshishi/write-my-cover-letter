@@ -1,6 +1,7 @@
 import { writeFileSync } from 'fs';
 import { createHeader } from './createHeader';
 import path from 'path';
+import './clearPersonalData';
 
 const writeHeaderToFile = async (writePath: string[], header: string) => {
   writeFileSync(path.resolve(...writePath), header);

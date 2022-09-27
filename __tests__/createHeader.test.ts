@@ -1,4 +1,4 @@
-import { createHeader } from '../src/createHeader';
+import { createHeader } from '../scripts/createHeader';
 import figlet from 'figlet';
 jest.spyOn(console, 'log').mockImplementation(() => {});
 describe('createHeader', () => {

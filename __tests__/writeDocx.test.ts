@@ -24,6 +24,7 @@ describe('writeDocx', () => {
         },
         path.resolve(__dirname, 'test-docs')
       );
+
       const afterWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
       expect(afterWrite.length).toBe(beforeWrite.length + 1);
     } catch (error) {
@@ -43,6 +44,7 @@ describe('writeDocx', () => {
         },
         path.resolve(__dirname, 'test-docs')
       );
+
       const afterWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
       expect(afterWrite.length).toBe(beforeWrite.length + 2);
     } catch (error) {
