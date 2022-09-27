@@ -1,5 +1,5 @@
 import { ContactInfo } from '../src/types';
-import { writeJSONToDisk } from '../src/updateData/updateDataQuestions';
+import { writeJSONToDisk } from '../src/utils';
 import { resolvePathFromCurrentDir } from '../src/utils';
 import { clearTestDocsDir } from '../test-utils';
 import fs from 'fs';

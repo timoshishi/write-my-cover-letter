@@ -1,4 +1,4 @@
-import { writeJSONToDisk } from './updateDataQuestions';
+import { writeJSONToDisk } from '../utils';
 import inquirer, { Answers } from 'inquirer';
 import type { PersonalData } from 'src/types';
 
@@ -6,7 +6,7 @@ export const updateContactInfo =
   (contactInfo: PersonalData['contactInfo']) => async (): Promise<PersonalData['contactInfo'] | void> => {
     try {
       const updatedContactInfo = JSON.parse(JSON.stringify(contactInfo));
-      // create a chain that will ask for each of the contact info fields
+
       const { sites, ...contact } = contactInfo;
       const contactInfoQuestions = Object.keys(contact).map((field) => ({
         type: 'input',

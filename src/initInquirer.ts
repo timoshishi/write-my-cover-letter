@@ -4,28 +4,29 @@ import { createCoverQuestions } from './createCoverQuestions';
 import { readFileSync } from 'fs';
 import path from 'path';
 import { checkIfShouldUpdate } from './checkIfShouldUpdate';
-import { hasFilledPersonalData } from './hasFilledPersonalData';
 import { readDefaultPersonalization, readPersonalization } from './readPersonalization';
 import { PersonalData, TextResponses } from './types';
 import { writeFiles } from './writeDocs/writeFiles';
-import { createPersonalizedDataQuestions } from './updateData/updateDataQuestions';
+import { updatePersonalizedData } from './updateData/updateDataQuestions';
 import { applyDefaultPersonalizationData } from './applyDefaultPersonalData';
 
 const initInquirer = async () => {
   try {
     const header = readFileSync(path.resolve(__dirname, 'header.txt'), 'utf8');
     console.log(header);
+
     let finalData: PersonalData | void;
     const personalData = await readPersonalization();
+
     if (!personalData) {
       throw new Error('No personal data found');
     }
-    const hasPersonalData = hasFilledPersonalData(personalData);
-    const { shouldUpdate } = await inquirer.prompt(checkIfShouldUpdate(hasPersonalData));
+
+    const { shouldUpdate } = await inquirer.prompt(checkIfShouldUpdate());
 
     if (shouldUpdate) {
       console.log('Please fill out the following questions to update your personal data');
-      await createPersonalizedDataQuestions(personalData);
+      await updatePersonalizedData(personalData);
     }
 
     finalData = await readPersonalization();

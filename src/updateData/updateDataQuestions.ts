@@ -1,9 +1,8 @@
 import inquirer, { Question } from 'inquirer';
 import { PersonalData, Roles } from '../types';
-import path from 'path';
-import fs from 'fs';
 import { readPersonalization } from '../readPersonalization';
 import { updateContactInfo } from './updateContactInfo';
+import { writeJSONToDisk } from '../utils';
 
 export const updatePersonalIntro = (personalIntro: string) => async (): Promise<{ personalIntro: string }> => {
   const response: {
@@ -23,15 +22,15 @@ export const updatePersonalIntro = (personalIntro: string) => async (): Promise<
   return responseObj;
 };
 
-export const createInitialRolesListQuestions = (roles: Roles): Question[] =>
+export const createRoleOptions = (roles: Roles): Question[] =>
   Object.keys(roles).map((role) => ({
     name: role,
     message: `Update the description for ${role}`,
     default: roles[role],
   }));
 
-export const updateRoles = (roles) => async () => {
-  const rolesQuestions = createInitialRolesListQuestions(roles);
+export const updateRoles = (roles) => async (): Promise<PersonalData['roles'] | void> => {
+  const roleOptions = createRoleOptions(roles);
   const initialPrompts = [
     {
       type: 'list',
@@ -42,10 +41,11 @@ export const updateRoles = (roles) => async () => {
           name: 'Add a new role',
           value: 'addRole',
         },
-        ...rolesQuestions,
+        ...roleOptions,
       ],
     },
   ];
+
   const responses = await inquirer.prompt(initialPrompts);
   if (responses.roles === 'addRole') {
     const {
@@ -84,7 +84,7 @@ export const updateRoles = (roles) => async () => {
   }
 };
 
-export const personalizationChoices = [
+const PERSONALIZATION_CHOICES = [
   {
     type: 'list',
     name: 'personalization',
@@ -98,8 +98,8 @@ export const personalizationChoices = [
   },
 ];
 
-export const createPersonalizedDataQuestions = async (personalData: PersonalData) => {
-  const answer = await inquirer.prompt(personalizationChoices);
+export const updatePersonalizedData = async (personalData: PersonalData) => {
+  const answer = await inquirer.prompt(PERSONALIZATION_CHOICES);
   if (answer.personalization === 'exit') {
     return;
   } else {
@@ -114,15 +114,6 @@ export const createPersonalizedDataQuestions = async (personalData: PersonalData
     if (!updatedPersonalData) {
       throw new Error('Could not read personalization');
     }
-    await createPersonalizedDataQuestions(updatedPersonalData);
+    await updatePersonalizedData(updatedPersonalData);
   }
-};
-
-export const writeJSONToDisk = async <T extends keyof PersonalData>(
-  key: T,
-  personalData: PersonalData[T] | { personalIntro: string },
-  writePath: string
-) => {
-  const json = JSON.stringify(personalData);
-  fs.writeFileSync(path.resolve(writePath, `${key}.json`), json);
 };

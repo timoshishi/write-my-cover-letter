@@ -1,8 +1,14 @@
 import inquirer from 'inquirer';
 import { addOrDeleteSites, updateContactInfo } from '../src/updateData/updateContactInfo';
+
 beforeAll(() => {
-  jest.spyOn(require('../src/updateData/updateDataQuestions'), 'writeJSONToDisk').mockImplementation(() => {});
+  jest.spyOn(require('../src/utils'), 'writeJSONToDisk').mockImplementation(() => {});
 });
+
+afterAll(() => {
+  jest.restoreAllMocks();
+});
+
 describe('addOrDeleteSites', () => {
   let spy;
   beforeEach(() => {
