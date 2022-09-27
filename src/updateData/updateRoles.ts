@@ -35,7 +35,7 @@ export const updateRole = async (role: string, description: string): Promise<Rol
   return { [role]: updatedDescription };
 };
 
-export const updateRoles = (roles) => async (): Promise<PersonalData['roles'] | void> => {
+export const updateRoles = async (roles): Promise<PersonalData['roles'] | void> => {
   const roleOptions = createRoleOptions(roles);
 
   const initialPrompts = [

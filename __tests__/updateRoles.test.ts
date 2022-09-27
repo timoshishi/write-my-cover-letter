@@ -14,12 +14,6 @@ describe('updateRoles', () => {
     jest.clearAllMocks();
   });
 
-  it('returns a function that returns a promise', async () => {
-    const initialFunction = updateRoles({ role: 'description' });
-    expect(initialFunction).toBeInstanceOf(Function);
-    //stop the process
-  });
-
   it('should return the old roles plus a new one if a user chooses to add a new role', async () => {
     const oldRoles = {
       role1: 'description1',
@@ -27,7 +21,7 @@ describe('updateRoles', () => {
     };
     inquirerSpy.mockResolvedValueOnce({ roles: 'addRole' });
     inquirerSpy.mockResolvedValueOnce({ newRole: 'role3', newRoleDescription: 'description3' });
-    const newRoles = await updateRoles(oldRoles)();
+    const newRoles = await updateRoles(oldRoles);
     expect(newRoles).toEqual({ ...oldRoles, role3: 'description3' });
   });
 
@@ -38,7 +32,8 @@ describe('updateRoles', () => {
     };
     inquirerSpy.mockResolvedValueOnce({ roles: 'addRole' });
     inquirerSpy.mockResolvedValueOnce({ newRole: 'role5', newRoleDescription: 'description3' });
-    await updateRoles(oldRoles)();
+
+    await updateRoles(oldRoles);
     expect(writeSpy).toHaveBeenCalledWith('roles', { ...oldRoles, role5: 'description3' }, 'cvPersonalization');
   });
 
@@ -49,7 +44,7 @@ describe('updateRoles', () => {
     };
     inquirerSpy.mockResolvedValueOnce({ roles: 'role1' });
     inquirerSpy.mockResolvedValueOnce({ updatedDescription: 'newer Description' });
-    const newRoles = await updateRoles(oldRoles)();
+    const newRoles = await updateRoles(oldRoles);
     expect(newRoles).toEqual({ ...oldRoles, role1: 'newer Description' });
   });
 });

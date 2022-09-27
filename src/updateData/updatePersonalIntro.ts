@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 import { writeJSONToDisk } from '../utils';
 
-export const updatePersonalIntro = (personalIntro: string) => async (): Promise<{ personalIntro: string }> => {
+export const updatePersonalIntro = async (personalIntro: string): Promise<{ personalIntro: string }> => {
   const response: {
     personalIntro: string;
   } = await inquirer.prompt([

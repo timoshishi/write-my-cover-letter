@@ -85,7 +85,8 @@ describe('updateContactInfo', () => {
       email: 'fake.com',
       phone: '000',
       sites: ['www.google.com'],
-    })();
+    });
+
     expect(returnedContactInfo).toEqual({
       name: 'bob',
       email: 'mersite.com',
@@ -107,7 +108,7 @@ describe('updateContactInfo', () => {
       email: 'fake.com',
       phone: '000',
       sites: ['www.google.com'],
-    })();
+    });
     expect(returnedContactInfo).toEqual({
       name: 'bob',
       email: 'mersite.com',
@@ -132,7 +133,7 @@ describe('updateContactInfo', () => {
       email: 'fake.com',
       phone: '000',
       sites: ['www.google.com'],
-    })();
+    });
     expect(returnedContactInfo).toEqual({
       name: 'bob',
       email: 'mersite.com',

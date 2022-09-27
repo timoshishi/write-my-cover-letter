@@ -13,15 +13,9 @@ describe('updatePersonalIntro', () => {
     jest.clearAllMocks();
   });
 
-  it('should return a function that returns a promise', () => {
-    const initialFunction = updatePersonalIntro('heeeey buddy');
-    expect(initialFunction).toBeInstanceOf(Function);
-    expect(initialFunction()).toBeInstanceOf(Promise);
-  });
-
   it('should update the personalIntro', async () => {
     spy.mockResolvedValueOnce({ personalIntro: 'Hello, my name is...' });
-    const results = await updatePersonalIntro('here is an intro')();
+    const results = await updatePersonalIntro('here is an intro');
     expect(writeJSONSpy).toHaveBeenCalledWith(
       'personalIntro',
       { personalIntro: 'Hello, my name is...' },
