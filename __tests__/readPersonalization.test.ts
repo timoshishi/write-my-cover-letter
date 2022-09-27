@@ -52,9 +52,6 @@ describe('readPersonalization', () => {
 
   it('should not have any length for the key in a file on first pass', async () => {
     const personalData = await readPersonalization([__dirname, '..', '__mocks__']);
-    expect(personalData!.roles.fullstack.length).toEqual(0);
-    expect(personalData!.roles.frontend.length).toEqual(0);
-    expect(personalData!.roles.backend.length).toEqual(0);
     expect(personalData?.contactInfo.email.length).toEqual(0);
     expect(personalData?.contactInfo.name.length).toEqual(0);
     expect(personalData?.contactInfo.phone.length).toEqual(0);
