@@ -6,6 +6,7 @@ import { handleCoverLetterData } from './handleCoverLetterData';
 const initInquirer = async () => {
   try {
     logHeader();
+
     const personalData = await handlePersonalData();
 
     const { textResponses, outputTypes, createCopy } = await handleCoverLetterData(personalData);

@@ -28,7 +28,9 @@ describe('updateData', () => {
         role2: 'description2',
       },
     };
+
     inquirerSpy.mockResolvedValueOnce({ personalization: 'exit' });
+
     const updatedData = await updatePersonalizedData(originalData);
     expect(updatedData).toEqual(originalData);
   });
@@ -46,6 +48,7 @@ describe('updateData', () => {
         role1: 'description1',
       },
     };
+
     inquirerSpy
       .mockResolvedValueOnce({ personalization: 'contactInfo' })
       .mockResolvedValueOnce({ name: 'John Doe', email: 'myemail', phone: '1234567890' })
@@ -53,9 +56,10 @@ describe('updateData', () => {
       .mockResolvedValueOnce({
         personalization: 'exit',
       });
-    // .mockResolvedValueOnce({ personalization: 'exit' });
+
     const updateContactInfoSpy = jest.spyOn(require('../src/updateData/updateContactInfo'), 'updateContactInfo');
-    const data = await updatePersonalizedData(originalData);
+    await updatePersonalizedData(originalData);
+
     expect(updateContactInfoSpy).toHaveBeenCalledWith(originalData.contactInfo);
     expect(updateContactInfoSpy).toHaveBeenCalledTimes(1);
     expect(updateContactInfoSpy).not.toHaveBeenCalledWith(originalData.personalIntro);
@@ -75,12 +79,14 @@ describe('updateData', () => {
         role1: 'description1',
       },
     };
+
     inquirerSpy
       .mockResolvedValueOnce({ personalization: 'personalIntro' })
       .mockResolvedValueOnce({ personalIntro: 'new intro' })
       .mockResolvedValueOnce({ personalization: 'exit' });
+
     const updateIntroSpy = jest.spyOn(require('../src/updateData/updatePersonalIntro'), 'updatePersonalIntro');
-    const data = await updatePersonalizedData(originalData);
+    await updatePersonalizedData(originalData);
     expect(updateIntroSpy).toHaveBeenCalledWith(originalData.personalIntro);
   });
 
@@ -97,13 +103,14 @@ describe('updateData', () => {
         role1: 'description1',
       },
     };
+
     inquirerSpy
       .mockResolvedValueOnce({ personalization: 'roles' })
       .mockResolvedValueOnce({ roles: 'addRole' })
       .mockResolvedValueOnce({ newRole: 'role3', newRoleDescription: 'description3' })
       .mockResolvedValueOnce({ personalization: 'exit' });
-    const updateRolesSpy = jest.spyOn(require('../src/updateData/updateRoles'), 'updateRoles');
 
+    const updateRolesSpy = jest.spyOn(require('../src/updateData/updateRoles'), 'updateRoles');
     await updatePersonalizedData(originalData);
     expect(updateRolesSpy).toHaveBeenCalledWith(originalData.roles);
   });

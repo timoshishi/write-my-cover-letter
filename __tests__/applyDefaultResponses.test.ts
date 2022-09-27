@@ -29,6 +29,7 @@ describe('applyDefaultResponses', () => {
       intro: '',
       skills: '',
     });
+
     const values = Object.values(responses);
     expect(values).toEqual(Object.values({ ...responses, ...DEFAULT_RESPONSES }));
   });

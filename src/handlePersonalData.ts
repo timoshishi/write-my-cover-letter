@@ -1,5 +1,5 @@
-import { readPersonalization } from './readPersonalization';
 import inquirer from 'inquirer';
+import { readPersonalization } from './readPersonalization';
 import { checkIfShouldUpdate } from './checkIfShouldUpdate';
 import { updatePersonalizedData } from './updateData/updateDataQuestions';
 import { applyDefaultPersonalizationData } from './applyDefaultPersonalData';
@@ -21,5 +21,6 @@ export const handlePersonalData = async (): Promise<PersonalData> => {
     await readPersonalization();
     return applyDefaultPersonalizationData(updatedData, defaultPersonalizationData);
   }
+
   return applyDefaultPersonalizationData(personalData, defaultPersonalizationData);
 };

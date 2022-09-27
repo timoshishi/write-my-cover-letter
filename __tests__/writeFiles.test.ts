@@ -48,6 +48,7 @@ describe('writeCoverLetter', () => {
       } as WriteFilesParams,
       path.resolve(__dirname, 'test-docs')
     );
+
     const afterWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
     expect(afterWrite.length).toBe(beforeWrite.length + 2);
   });
@@ -65,6 +66,7 @@ describe('writeCoverLetter', () => {
       } as WriteFilesParams,
       path.resolve(__dirname, 'test-docs')
     );
+
     const afterWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
     expect(afterWrite.length).toBe(beforeWrite.length + 1);
   });
@@ -82,6 +84,7 @@ describe('writeCoverLetter', () => {
       } as WriteFilesParams,
       path.resolve(__dirname, 'test-docs')
     );
+
     const afterWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
     expect(afterWrite.length).toBe(beforeWrite.length + 2);
   });
@@ -99,6 +102,7 @@ describe('writeCoverLetter', () => {
       } as WriteFilesParams,
       path.resolve(__dirname, 'test-docs')
     );
+
     const afterWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
     expect(afterWrite.length).toBe(beforeWrite.length + 4);
   });
@@ -118,6 +122,7 @@ describe('writeCoverLetter', () => {
     const afterWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
     const formattedName = formatName(personalData.contactInfo.name);
     const formattedCompany = formatName(textResponses.company);
+
     expect(afterWrite.includes(`${formattedCompany}.docx`)).toBeTruthy();
     expect(afterWrite.includes(`${formattedCompany}.pdf`)).toBeTruthy();
     expect(afterWrite.includes(`${formattedName}-cover-letter.pdf`)).toBeTruthy();

@@ -76,6 +76,7 @@ describe('writeDocx', () => {
       },
       path.resolve(__dirname, 'test-docs')
     );
+
     const result = await writePDF(
       {
         name: personalData.contactInfo.name,
@@ -84,6 +85,7 @@ describe('writeDocx', () => {
       },
       path.resolve(__dirname, 'test-docs')
     );
+
     expect(result).toBe('pdf written');
   });
 
@@ -91,6 +93,7 @@ describe('writeDocx', () => {
     jest.spyOn(libre, 'convert').mockImplementation((file, ex, undefined, callback) => {
       callback(new Error('figlet not found'), Buffer.from(''));
     });
+
     await expect(
       writePDF(
         {

@@ -6,6 +6,7 @@ import { PersonalData } from '../src/types';
 describe('applyDefaultPersonalizationData', () => {
   let dPers: PersonalData;
   let pers: PersonalData;
+
   beforeEach(() => {
     dPers = {
       contactInfo: dPersonalData.contactInfo,
@@ -18,6 +19,7 @@ describe('applyDefaultPersonalizationData', () => {
       roles: emptyPersonalData.roles,
     };
   });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -33,7 +35,6 @@ describe('applyDefaultPersonalizationData', () => {
     pers.contactInfo.sites = ['mySite'];
 
     const result2 = applyDefaultPersonalizationData(pers, dPers);
-
     expect(result2.contactInfo.email).toEqual(dPers.contactInfo.email);
     expect(result2.contactInfo.name).toEqual('myName');
     expect(result2.contactInfo.phone).toEqual('111');
@@ -41,26 +42,15 @@ describe('applyDefaultPersonalizationData', () => {
   });
 
   it('should apply the personal array only', () => {
+    pers.contactInfo.sites = ['mysitasdfe'];
     const result3 = applyDefaultPersonalizationData(
-      {
-        contactInfo: {
-          email: '',
-          name: 'myName',
-          phone: 'myPhone',
-          sites: ['mysitasdfe'],
-        },
-        personalIntro: 'myIntro',
-        roles: {
-          backend: 'yes',
-          frontend: 'yes',
-          fullstack: 'yes',
-        },
-      },
+      pers,
+
       dPers
     );
+
     expect(result3.contactInfo.sites).toEqual(['mysitasdfe']);
     expect(result3.contactInfo.sites).not.toEqual(dPers.contactInfo.sites);
-
     expect(result3.contactInfo.email).toEqual(dPers.contactInfo.email);
     expect(result3.contactInfo.name).toEqual('myName');
   });
@@ -74,10 +64,12 @@ describe('applyDefaultPersonalizationData', () => {
       sites: ['mysitasdfe'],
     };
     pers.personalIntro = 'myIntro';
+
     const result4 = applyDefaultPersonalizationData(pers, dPers);
     expect(result4.roles).toEqual(dPers.roles);
     expect(result4.contactInfo.name).not.toEqual(dPers.contactInfo.name);
   });
+
   it('should apply name, email and sites if they do not exists', () => {
     pers.contactInfo = {
       email: '',

@@ -4,6 +4,7 @@ import inquirer from 'inquirer';
 describe('updatePersonalIntro', () => {
   let spy;
   let writeJSONSpy;
+
   beforeEach(() => {
     spy = jest.spyOn(inquirer, 'prompt');
     writeJSONSpy = jest.spyOn(require('../src/utils'), 'writeJSONToDisk').mockResolvedValue(() => {});
@@ -15,6 +16,7 @@ describe('updatePersonalIntro', () => {
 
   it('should update the personalIntro', async () => {
     spy.mockResolvedValueOnce({ personalIntro: 'Hello, my name is...' });
+
     const results = await updatePersonalIntro('here is an intro');
     expect(writeJSONSpy).toHaveBeenCalledWith(
       'personalIntro',

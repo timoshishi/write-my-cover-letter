@@ -6,6 +6,7 @@ export const updateContactInfo = async (
   contactInfo: PersonalData['contactInfo']
 ): Promise<PersonalData['contactInfo'] | void> => {
   try {
+    /* avoid any reference errors */
     const updatedContactInfo = JSON.parse(JSON.stringify(contactInfo));
 
     const { sites, ...contact } = contactInfo;
@@ -20,7 +21,7 @@ export const updateContactInfo = async (
     const { shouldUpdateSites } = await inquirer.prompt({
       type: 'confirm',
       name: 'shouldUpdateSites',
-      message: 'Would you like to update your links?',
+      message: 'Would you like to update or add some personal websites?',
       default: false,
     });
 
@@ -34,7 +35,9 @@ export const updateContactInfo = async (
       email: responses.email,
       phone: responses.phone,
     };
+
     await writeJSONToDisk('contactInfo', updatedInfo, 'cvPersonalization');
+
     return updatedInfo;
   } catch (error) {
     console.error(error);
@@ -43,8 +46,11 @@ export const updateContactInfo = async (
 
 export const addOrDeleteSites = async (sites: string[]): Promise<string[] | void> => {
   let updatedSites = sites;
+
+  /* only have the option to delete if there are sites to delete */
   const addOrDeleteChoices = [{ name: 'Add a site', value: 'add' }];
   sites.length && addOrDeleteChoices.push({ name: 'Delete a site', value: 'delete' });
+
   try {
     const { addOrDelete } = await inquirer.prompt([
       {
@@ -90,6 +96,7 @@ export const addOrDeleteSites = async (sites: string[]): Promise<string[] | void
     });
 
     if (shouldContinue) {
+      /* recursively call this function until the user is done editing */
       return addOrDeleteSites(updatedSites);
     } else {
       return updatedSites;

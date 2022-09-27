@@ -19,8 +19,10 @@ describe('updateRoles', () => {
       role1: 'description1',
       role2: 'description2',
     };
+
     inquirerSpy.mockResolvedValueOnce({ roles: 'addRole' });
     inquirerSpy.mockResolvedValueOnce({ newRole: 'role3', newRoleDescription: 'description3' });
+
     const newRoles = await updateRoles(oldRoles);
     expect(newRoles).toEqual({ ...oldRoles, role3: 'description3' });
   });
@@ -30,6 +32,7 @@ describe('updateRoles', () => {
       role1: 'description1',
       role2: 'description2',
     };
+
     inquirerSpy.mockResolvedValueOnce({ roles: 'addRole' });
     inquirerSpy.mockResolvedValueOnce({ newRole: 'role5', newRoleDescription: 'description3' });
 
@@ -42,8 +45,10 @@ describe('updateRoles', () => {
       role1: 'description1',
       role2: 'description2',
     };
+
     inquirerSpy.mockResolvedValueOnce({ roles: 'role1' });
     inquirerSpy.mockResolvedValueOnce({ updatedDescription: 'newer Description' });
+
     const newRoles = await updateRoles(oldRoles);
     expect(newRoles).toEqual({ ...oldRoles, role1: 'newer Description' });
   });
@@ -55,6 +60,7 @@ describe('createRoleOptions', () => {
       role1: 'role1 description',
       role2: 'role2 description',
     };
+
     const results = createRoleOptions(roles);
     expect(results).toHaveLength(2);
     expect(results[0]).toHaveProperty('name');
@@ -67,6 +73,7 @@ describe('createRoleOptions', () => {
       role1: 'role1 description',
       role2: 'role2 description',
     };
+
     const results = createRoleOptions(roles);
     expect(results[0].name).toEqual('role1');
     expect(results[0].message).toEqual('Update the description for role1');

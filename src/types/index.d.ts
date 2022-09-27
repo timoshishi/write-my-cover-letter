@@ -1,7 +1,7 @@
 export interface PersonalData {
   personalIntro: string;
   contactInfo: ContactInfo;
-  roles: Record<string, string>;
+  roles: Roles;
 }
 
 export interface PersonalIntro {

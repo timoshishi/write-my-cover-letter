@@ -24,26 +24,27 @@ export const updatePersonalizedData = async (personalData: PersonalData): Promis
     const answer: {
       personalization: keyof PersonalData | 'exit';
     } = await inquirer.prompt(PERSONALIZATION_CHOICES);
+
     if (answer.personalization === 'exit') {
       return personalData;
     } else {
-      // get the function from the map using the PersonalData key from the answer
+      /* get the function from the map using the PersonalData key from the answer */
       const updateDataFn = {
         roles: updateRoles,
         personalIntro: updatePersonalIntro,
         contactInfo: updateContactInfo,
       }[answer.personalization];
 
-      // invoke the function using the personalData passed in
+      /* invoke the function using the personalData passed in */
       await updateDataFn(personalData[answer.personalization]);
 
-      // read the personalization data from disk
+      /* read the personalization data from disk */
       const updatedPersonalData = await readPersonalization();
       if (!updatedPersonalData) {
         throw new Error('Could not read personalization');
       }
 
-      // recursively call this function with the updated personalData
+      /* recursively call this function with the updated personalData */
       return await updatePersonalizedData(updatedPersonalData);
     }
   } catch (error) {

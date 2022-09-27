@@ -10,6 +10,8 @@ export const createRoleOptions = (roles: Roles): { name: string; message: string
   }));
 
 export const createRole = async (): Promise<{ role: string; description: string }> => {
+  //TODO: Add option to delete a role
+
   const { newRole, newRoleDescription } = await inquirer.prompt([
     {
       type: 'input',
@@ -57,11 +59,13 @@ export const updateRoles = async (roles): Promise<PersonalData['roles'] | void> 
   if (responses.roles === 'addRole') {
     const { role, description } = await createRole();
     const updatedRoles = { ...roles, [role]: description };
+
     await writeJSONToDisk('roles', updatedRoles, 'cvPersonalization');
     return updatedRoles;
   } else {
     const updatedRole = await updateRole(responses.roles, roles[responses.roles]);
     const updatedRoles = { ...roles, ...updatedRole };
+
     await writeJSONToDisk('roles', updatedRoles, 'cvPersonalization');
     return updatedRoles;
   }
