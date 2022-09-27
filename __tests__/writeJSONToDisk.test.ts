@@ -13,16 +13,6 @@ describe('writeJSONToDisk', () => {
     clearTestDocsDir();
   });
 
-  it('it should return a promise', () => {
-    expect(
-      writeJSONToDisk<'contactInfo'>(
-        'contactInfo',
-        {} as ContactInfo,
-        resolvePathFromCurrentDir(__dirname, '__tests__/test-docs')
-      )
-    ).toBeInstanceOf(Promise);
-  });
-
   it('should write a file with the keyname that was passed in', () => {
     const testPath = resolvePathFromCurrentDir(__dirname, '__tests__/test-docs');
     writeJSONToDisk<'contactInfo'>('contactInfo', {} as ContactInfo, testPath).then(() => {

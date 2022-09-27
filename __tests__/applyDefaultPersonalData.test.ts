@@ -52,4 +52,39 @@ describe('applyDefaultPersonalizationData', () => {
     expect(result3.contactInfo.email).toEqual(defaultPersonalData.contactInfo.email);
     expect(result3.contactInfo.name).toEqual('myName');
   });
+
+  it('should apply defaults to the roles if there are no roles in the personalData', () => {
+    const result4 = applyDefaultPersonalizationData(
+      {
+        contactInfo: {
+          email: '',
+          name: 'myName',
+          phone: 'myPhone',
+          sites: ['mysitasdfe'],
+        },
+        personalIntro: 'myIntro',
+        roles: {},
+      },
+      defaultPersonalData
+    );
+    expect(result4.roles).toEqual(defaultPersonalData.roles);
+  });
+  it('should apply name, email and sites if they do not exists', () => {
+    const result5 = applyDefaultPersonalizationData(
+      {
+        contactInfo: {
+          email: '',
+          name: '',
+          phone: 'myPhone',
+          sites: undefined as unknown as [],
+        },
+        personalIntro: 'myIntro',
+        roles: {},
+      },
+      defaultPersonalData
+    );
+    expect(result5.contactInfo.name).toEqual(defaultPersonalData.contactInfo.name);
+    expect(result5.contactInfo.email).toEqual(defaultPersonalData.contactInfo.email);
+    expect(result5.contactInfo.sites).toEqual(defaultPersonalData.contactInfo.sites);
+  });
 });

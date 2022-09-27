@@ -1,4 +1,58 @@
 import { createRoleOptions, updateRoles } from '../src/updateData/updateRoles';
+import inquirer from 'inquirer';
+
+describe('updateRoles', () => {
+  let inquirerSpy: jest.SpyInstance;
+  let writeSpy: jest.SpyInstance;
+
+  beforeEach(() => {
+    inquirerSpy = jest.spyOn(inquirer, 'prompt');
+    writeSpy = jest.spyOn(require('../src/utils'), 'writeJSONToDisk').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('returns a function that returns a promise', async () => {
+    const initialFunction = updateRoles({ role: 'description' });
+    expect(initialFunction).toBeInstanceOf(Function);
+    //stop the process
+  });
+
+  it('should return the old roles plus a new one if a user chooses to add a new role', async () => {
+    const oldRoles = {
+      role1: 'description1',
+      role2: 'description2',
+    };
+    inquirerSpy.mockResolvedValueOnce({ roles: 'addRole' });
+    inquirerSpy.mockResolvedValueOnce({ newRole: 'role3', newRoleDescription: 'description3' });
+    const newRoles = await updateRoles(oldRoles)();
+    expect(newRoles).toEqual({ ...oldRoles, role3: 'description3' });
+  });
+
+  it('should call writeToDisk with the updatedRoles', async () => {
+    const oldRoles = {
+      role1: 'description1',
+      role2: 'description2',
+    };
+    inquirerSpy.mockResolvedValueOnce({ roles: 'addRole' });
+    inquirerSpy.mockResolvedValueOnce({ newRole: 'role5', newRoleDescription: 'description3' });
+    await updateRoles(oldRoles)();
+    expect(writeSpy).toHaveBeenCalledWith('roles', { ...oldRoles, role5: 'description3' }, 'cvPersonalization');
+  });
+
+  it('should update a role description if update role is selected', async () => {
+    const oldRoles = {
+      role1: 'description1',
+      role2: 'description2',
+    };
+    inquirerSpy.mockResolvedValueOnce({ roles: 'role1' });
+    inquirerSpy.mockResolvedValueOnce({ updatedDescription: 'newer Description' });
+    const newRoles = await updateRoles(oldRoles)();
+    expect(newRoles).toEqual({ ...oldRoles, role1: 'newer Description' });
+  });
+});
 
 describe('createRoleOptions', () => {
   it('should return an array of objects with name, message and default properties', () => {
