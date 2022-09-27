@@ -3,24 +3,7 @@ import { PersonalData, Roles } from '../types';
 import { readPersonalization } from '../readPersonalization';
 import { updateContactInfo } from './updateContactInfo';
 import { writeJSONToDisk } from '../utils';
-
-export const updatePersonalIntro = (personalIntro: string) => async (): Promise<{ personalIntro: string }> => {
-  const response: {
-    personalIntro: string;
-  } = await inquirer.prompt([
-    {
-      type: 'input',
-      name: 'personalIntro',
-      message: 'Add an intro about yourself',
-      default: personalIntro,
-    },
-  ]);
-  const responseObj = {
-    personalIntro: response.personalIntro,
-  };
-  await writeJSONToDisk('personalIntro', responseObj, 'cvPersonalization');
-  return responseObj;
-};
+import { updatePersonalIntro } from './updatePersonalIntro';
 
 export const createRoleOptions = (roles: Roles): Question[] =>
   Object.keys(roles).map((role) => ({
