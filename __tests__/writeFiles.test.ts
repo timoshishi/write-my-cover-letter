@@ -1,12 +1,12 @@
-import { writeFiles } from '../src/writeDocs/writeFiles';
+import { writeCoverLetter } from '../src/writeDocs/writeCoverLetter';
 import fs from 'fs';
 import path from 'path';
-import { WriteFilesParams } from '../src/writeDocs/writeFiles';
+import { WriteFilesParams } from '../src/writeDocs/writeCoverLetter';
 import { personalData, cvText, textResponses } from '../__mocks__';
 import { formatName } from '../src/utils';
 import { clearTestDocsDir } from '../test-utils';
 
-describe('writeFiles', () => {
+describe('writeCoverLetter', () => {
   beforeEach(() => {
     clearTestDocsDir();
   });
@@ -15,12 +15,12 @@ describe('writeFiles', () => {
   });
 
   it('it should reject if no values are passed', async () => {
-    await expect(writeFiles({} as any)).rejects.toThrow();
+    await expect(writeCoverLetter({} as any)).rejects.toThrow();
   });
 
   it('it should write one file if copy is false and only docx is in output', async () => {
     const beforeWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
-    await writeFiles(
+    await writeCoverLetter(
       {
         personalData,
         cvText,
@@ -37,7 +37,7 @@ describe('writeFiles', () => {
 
   it('it should write two files if copy is true and only docx is in output', async () => {
     const beforeWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
-    await writeFiles(
+    await writeCoverLetter(
       {
         personalData,
         cvText,
@@ -54,7 +54,7 @@ describe('writeFiles', () => {
 
   it('it should write one file if copy is false and only pdf is in output', async () => {
     const beforeWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
-    await writeFiles(
+    await writeCoverLetter(
       {
         personalData,
         cvText,
@@ -71,7 +71,7 @@ describe('writeFiles', () => {
 
   it('it should write two files if copy is true and only pdf is in output', async () => {
     const beforeWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
-    await writeFiles(
+    await writeCoverLetter(
       {
         personalData,
         cvText,
@@ -88,7 +88,7 @@ describe('writeFiles', () => {
 
   it('it should write 4 files if copy is true and both pdf and docx are in output', async () => {
     const beforeWrite = fs.readdirSync(path.resolve(__dirname, 'test-docs'));
-    await writeFiles(
+    await writeCoverLetter(
       {
         personalData,
         cvText,
@@ -104,7 +104,7 @@ describe('writeFiles', () => {
   });
 
   it('should have properly formatted filenames and extensions', async () => {
-    await writeFiles(
+    await writeCoverLetter(
       {
         personalData,
         cvText,

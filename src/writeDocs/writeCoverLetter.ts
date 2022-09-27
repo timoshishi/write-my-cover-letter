@@ -12,7 +12,7 @@ export interface WriteFilesParams {
   personalData: PersonalData;
 }
 
-export const writeFiles = async (
+export const writeCoverLetter = async (
   { textResponses, outputTypes, createCopy, personalData }: WriteFilesParams,
   writePath?: string
 ) => {

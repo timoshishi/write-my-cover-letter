@@ -1,50 +1,17 @@
-import inquirer from 'inquirer';
-import { applyDefaultResponses } from './applyDefaultResponses';
-import { createCoverQuestions } from './createCoverQuestions';
-import { readFileSync } from 'fs';
-import path from 'path';
-import { checkIfShouldUpdate } from './checkIfShouldUpdate';
-import { readDefaultPersonalization, readPersonalization } from './readPersonalization';
-import { PersonalData, TextResponses } from './types';
-import { writeFiles } from './writeDocs/writeFiles';
-import { updatePersonalizedData } from './updateData/updateDataQuestions';
-import { applyDefaultPersonalizationData } from './applyDefaultPersonalData';
+import { logHeader } from './logHeader';
+import { writeCoverLetter } from './writeDocs/writeCoverLetter';
+import { handlePersonalData } from './handlePersonalData';
+import { handleCoverLetterData } from './handleCoverLetterData';
 
 const initInquirer = async () => {
   try {
-    const header = readFileSync(path.resolve(__dirname, 'header.txt'), 'utf8');
-    console.log(header);
+    logHeader();
+    const personalData = await handlePersonalData();
 
-    let finalData: PersonalData | void;
-    const personalData = await readPersonalization();
+    const { textResponses, outputTypes, createCopy } = await handleCoverLetterData(personalData);
 
-    if (!personalData) {
-      throw new Error('No personal data found');
-    }
+    await writeCoverLetter({ textResponses, outputTypes, createCopy, personalData });
 
-    const { shouldUpdate } = await inquirer.prompt(checkIfShouldUpdate());
-
-    if (shouldUpdate) {
-      console.log('Please fill out the following questions to update your personal data');
-      await updatePersonalizedData(personalData);
-    }
-
-    finalData = await readPersonalization();
-    const defaultPersonalizationData = await readDefaultPersonalization();
-    finalData = applyDefaultPersonalizationData(personalData, defaultPersonalizationData!);
-
-    if (!finalData) {
-      throw new Error('No personal data found');
-    }
-
-    const coverQuestions = createCoverQuestions(finalData);
-
-    const { outputTypes, createCopy, ...textResponses } = await inquirer.prompt(coverQuestions);
-    const result: TextResponses = textResponses;
-    // assign defaults to the text responses for testing purposes
-    const textResponsesWithDefaults = applyDefaultResponses(result);
-
-    await writeFiles({ textResponses: textResponsesWithDefaults, outputTypes, createCopy, personalData });
     return 'files written';
   } catch (err) {
     console.error(err);

@@ -53,3 +53,5 @@ export interface CVText {
   personalIntro: string;
   closer: string;
 }
+
+export type OutputTypes = ('pdf' | 'docx')[];
