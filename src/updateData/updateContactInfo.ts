@@ -1,6 +1,6 @@
 import { writeJSONToDisk } from '../utils';
 import inquirer, { Answers } from 'inquirer';
-import type { PersonalData } from 'src/types';
+import type { PersonalData } from '../types';
 
 export const updateContactInfo = async (
   contactInfo: PersonalData['contactInfo']
