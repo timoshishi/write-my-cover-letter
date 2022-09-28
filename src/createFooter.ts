@@ -16,8 +16,8 @@ export const createFooter = async (type: 'warm' | 'hot' | 'galaxy') => {
 
     const memeText = {
       warm: 'PERSONALIZING YOUR COVER LETTER',
-      hot: 'USING THE DEFAULTS',
-      galaxy: 'SPAMMING THE RETURN KEY',
+      hot: 'USING DEFAULT PERSONAL DATA',
+      galaxy: 'USING DEFAULTS AND|SPAMMING THE RETURN KEY',
     }[type];
 
     const imageFile = await terminalImage.file(imgPath, {
@@ -26,7 +26,7 @@ export const createFooter = async (type: 'warm' | 'hot' | 'galaxy') => {
 
     const boxenOptions: BoxenOptions = {
       textAlignment: 'center',
-      backgroundColor: 'white',
+      // backgroundColor: 'white',
       borderColor: 'black',
       borderStyle: 'single',
     };
@@ -45,10 +45,17 @@ export const createFooter = async (type: 'warm' | 'hot' | 'galaxy') => {
       env: 'node',
     };
 
-    const cTxt = cfonts.render(memeText, fontOptions);
-    console.log(boxen(imageFile + cTxt.string, boxenOptions));
+    const formattedMemeText = cfonts.render(memeText, fontOptions);
+    const coverLetterWritten = cfonts.render('COVER LETTER WRITTEN!', {
+      ...fontOptions,
+      font: 'chrome',
+      colors: ['green'],
+    });
+    console.log(boxen(imageFile + formattedMemeText.string, { ...boxenOptions, backgroundColor: 'white' }));
+    console.log(boxen(coverLetterWritten.string, { ...boxenOptions }));
     return type;
   } catch (error) {
     console.error(error);
   }
 };
+createFooter('warm');
