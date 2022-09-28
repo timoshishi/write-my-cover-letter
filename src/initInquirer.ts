@@ -2,10 +2,12 @@ import { logHeader } from './logHeader';
 import { writeCoverLetter } from './writeDocs/writeCoverLetter';
 import { handlePersonalData } from './handlePersonalData';
 import { handleCoverLetterData } from './handleCoverLetterData';
+import { createKeypressStream } from './createKeypressStream';
 
 const initInquirer = async () => {
   try {
     logHeader();
+    const keysPressed = createKeypressStream(process);
 
     const personalData = await handlePersonalData();
 

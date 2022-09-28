@@ -22,8 +22,7 @@ export type HandleCompleteParams = {
 };
 
 export const handleComplete = async ({ personalDataUsed, keysPressed }: HandleCompleteParams): Promise<BrainTypes> => {
-  const defaultPersonalization: PersonalData | undefined = await DEFAULT_PERSONALIZATION;
-  if (!defaultPersonalization) throw new Error('No default personalization data found');
+  const defaultPersonalization = DEFAULT_PERSONALIZATION;
 
   const usedDefaultContactInfo = Object.keys(personalDataUsed.contactInfo).every((key) => {
     if (key === 'sites') return true;

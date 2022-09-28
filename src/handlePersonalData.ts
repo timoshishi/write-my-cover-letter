@@ -11,9 +11,8 @@ export const handlePersonalData = async (): Promise<PersonalData> => {
   if (!personalData) throw new Error('No personal data found');
 
   const defaultPersonalizationData = DEFAULT_PERSONALIZATION;
-  if (!defaultPersonalizationData) throw new Error('No default personalization data found');
 
-  const { shouldUpdate } = await inquirer.prompt(checkIfShouldUpdate());
+  const shouldUpdate = await checkIfShouldUpdate();
 
   if (shouldUpdate) {
     const updatedData = await updatePersonalizedData(personalData);

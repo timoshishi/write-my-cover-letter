@@ -2,8 +2,22 @@ import { handleComplete, getBrainType } from '../src/handleComplete';
 import * as createFooter from '../src/createFooter';
 import { PersonalData } from '../src/types';
 import { DEFAULT_PERSONALIZATION } from '../src/constants';
+import { createKeypressStream } from '../src/createKeypressStream';
+import readline from 'readline';
+import { stdin } from 'mock-stdin';
+
+const keys = {
+  up: '\x1B\x5B\x41',
+  down: '\x1B\x5B\x42',
+  enter: '\x0D',
+  space: '\x20',
+};
 
 jest.spyOn(createFooter, 'createFooter').mockResolvedValue('galaxy');
+
+let io;
+beforeAll(() => (io = stdin()));
+afterAll(() => io.restore());
 
 describe('handleComplete', () => {
   let defaultData;
@@ -105,5 +119,27 @@ describe('getBrainType', () => {
       keysPressed: ['return', 'return', 'return', 'return', 'return', 'return', 'return', 'return', 'return', 'a'],
     });
     expect(result).toEqual('warm');
+  });
+});
+
+describe('createKeypressStream', () => {
+  it('should return an array', () => {
+    const result = createKeypressStream(process);
+    expect(result).toBeDefined();
+    expect(Array.isArray(result)).toEqual(true);
+  });
+  it('should store the key name that was pressed', () => {
+    // mock presses in process.std.in
+
+    const result = createKeypressStream(process);
+    expect(result).not.toEqual(['return']);
+    io.send(keys.enter);
+    expect(result).toEqual(['return']);
+    expect(result.length).toBe(1);
+    io.send(keys.enter);
+    expect(result).toEqual(['return', 'return']);
+    expect(result.length).toBe(2);
+    io.send(keys.space);
+    expect(result).toEqual(['return', 'return', 'space']);
   });
 });
