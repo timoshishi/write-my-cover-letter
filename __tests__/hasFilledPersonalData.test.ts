@@ -3,11 +3,11 @@ import { PersonalData } from '../src/types';
 import { personalData } from '../__mocks__';
 
 describe('hasFilledPersonalData', () => {
-  test('it should return true if all personal data is filled', () => {
+  it('it should return true if all personal data is filled', () => {
     expect(hasFilledPersonalData(personalData)).toEqual(true);
   });
 
-  test('it should return false if all personal data is missing', () => {
+  it('it should return false if all personal data is missing', () => {
     const missingData: PersonalData = {
       contactInfo: {
         email: '',
@@ -22,10 +22,11 @@ describe('hasFilledPersonalData', () => {
         fullstack: '',
       },
     };
+
     expect(hasFilledPersonalData(missingData)).toEqual(false);
   });
 
-  test('it should return false if any personalData is missing', () => {
+  it('it should return false if any personalData is missing', () => {
     const missingData: PersonalData = {
       contactInfo: {
         email: 'myEmail@email.com',
@@ -58,6 +59,7 @@ describe('hasFilledPersonalData', () => {
         fullstack: 'yes',
       },
     };
+
     expect(hasFilledPersonalData(missingOnlySites)).toEqual(true);
   });
 
@@ -76,8 +78,10 @@ describe('hasFilledPersonalData', () => {
         fullstack: 'yes',
       },
     };
+
     expect(hasFilledPersonalData(missingOnlyPersonalIntro)).toEqual(false);
   });
+
   it('should return false if a role has a missing intro', () => {
     const missingRoleIntro: PersonalData = {
       contactInfo: {
@@ -93,6 +97,7 @@ describe('hasFilledPersonalData', () => {
         fullstack: 'yes',
       },
     };
+
     expect(hasFilledPersonalData(missingRoleIntro)).toEqual(false);
   });
 });

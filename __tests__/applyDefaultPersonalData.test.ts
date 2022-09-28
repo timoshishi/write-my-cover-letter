@@ -1,5 +1,5 @@
-import * as dPersonalData from '../__mocks__/tsDefaultPersonalization';
 import * as emptyPersonalData from '../__mocks__/tsPersonalization';
+import { DEFAULT_PERSONALIZATION } from '../src/constants';
 import { applyDefaultPersonalizationData } from '../src/applyDefaultPersonalData';
 import { PersonalData } from '../src/types';
 
@@ -8,11 +8,7 @@ describe('applyDefaultPersonalizationData', () => {
   let pers: PersonalData;
 
   beforeEach(() => {
-    dPers = {
-      contactInfo: dPersonalData.contactInfo,
-      personalIntro: dPersonalData.personalIntro,
-      roles: dPersonalData.roles,
-    };
+    dPers = DEFAULT_PERSONALIZATION;
     pers = {
       contactInfo: emptyPersonalData.contactInfo,
       personalIntro: emptyPersonalData.personalIntro,

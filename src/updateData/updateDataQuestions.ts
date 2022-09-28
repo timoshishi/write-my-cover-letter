@@ -36,7 +36,7 @@ export const updatePersonalizedData = async (personalData: PersonalData): Promis
       }[answer.personalization];
 
       /* invoke the function using the personalData passed in */
-      await updateDataFn(personalData[answer.personalization]);
+      await updateDataFn(personalData[answer.personalization as string]);
 
       /* read the personalization data from disk */
       const updatedPersonalData = await readPersonalization();

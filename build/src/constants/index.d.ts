@@ -1,3 +1,4 @@
+import { PersonalData } from '../types';
 export declare const DEFAULT_STYLES: {
     size: number;
     style: string;
@@ -23,3 +24,4 @@ export declare const DEFAULT_RESPONSES: {
     skills: string;
     intro: string;
 };
+export declare const DEFAULT_PERSONALIZATION: PersonalData;
