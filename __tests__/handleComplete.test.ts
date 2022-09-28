@@ -68,6 +68,7 @@ describe('handleComplete', () => {
     });
     expect(result).toEqual('warm');
   });
+
   it('should return hot if the name passed in in is different from the default name', async () => {
     const differentPersonalData = defaultData;
     differentPersonalData.contactInfo.name = 'bob';
@@ -87,6 +88,7 @@ describe('handleComplete', () => {
     });
     expect(result).toEqual('hot');
   });
+
   it('should return galaxy if the data passed in is the same as the default data', async () => {
     const result = await handleComplete({
       personalDataUsed: defaultData,
@@ -125,13 +127,13 @@ describe('getBrainType', () => {
 describe('createKeypressStream', () => {
   it('should return an array', () => {
     const result = createKeypressStream(process);
+
     expect(result).toBeDefined();
     expect(Array.isArray(result)).toEqual(true);
   });
   it('should store the key name that was pressed', () => {
-    // mock presses in process.std.in
-
     const result = createKeypressStream(process);
+
     expect(result).not.toEqual(['return']);
     io.send(keys.enter);
     expect(result).toEqual(['return']);

@@ -55,3 +55,5 @@ export interface CVText {
 }
 
 export type OutputTypes = ('pdf' | 'docx')[];
+
+export type BrainTypes = 'warm' | 'hot' | 'galaxy';

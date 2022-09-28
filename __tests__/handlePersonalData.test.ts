@@ -7,6 +7,7 @@ describe('checkIfShouldUpdate', () => {
     const result = await checkIfShouldUpdate();
     expect(result).toEqual(true);
   });
+
   it('should return false if the data is the same', async () => {
     jest.spyOn(inquirer, 'prompt').mockResolvedValue({ shouldUpdate: false });
     const result = await checkIfShouldUpdate();

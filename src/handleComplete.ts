@@ -22,16 +22,15 @@ export type HandleCompleteParams = {
 };
 
 export const handleComplete = async ({ personalDataUsed, keysPressed }: HandleCompleteParams): Promise<BrainTypes> => {
-  const defaultPersonalization = DEFAULT_PERSONALIZATION;
-
   const usedDefaultContactInfo = Object.keys(personalDataUsed.contactInfo).every((key) => {
     if (key === 'sites') return true;
-    return personalDataUsed.contactInfo[key] === defaultPersonalization.contactInfo[key];
+    return personalDataUsed.contactInfo[key] === DEFAULT_PERSONALIZATION.contactInfo[key];
   });
-  const usedDefaultPersonalIntro = personalDataUsed.personalIntro === defaultPersonalization.personalIntro;
+
+  const usedDefaultPersonalIntro = personalDataUsed.personalIntro === DEFAULT_PERSONALIZATION.personalIntro;
 
   const usedDefaultRoles = Object.keys(personalDataUsed.roles).every(
-    (key) => personalDataUsed.roles[key] === defaultPersonalization.roles[key]
+    (key) => personalDataUsed.roles[key] === DEFAULT_PERSONALIZATION.roles[key]
   );
 
   const brainType = getBrainType({
