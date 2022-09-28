@@ -1,3 +1,5 @@
+import { PersonalData } from '../types';
+
 export const DEFAULT_STYLES = {
   size: 22,
   style: 'wellSpaced',
@@ -32,4 +34,18 @@ export const DEFAULT_RESPONSES = {
   industry: 'generic',
   skills: 'Skill, Skill and Skill',
   intro: "I'm interested in the company because...",
+};
+
+export const DEFAULT_PERSONALIZATION: PersonalData = {
+  contactInfo: {
+    name: 'Bob Loblaw',
+    phone: '(555) 555-5555',
+    email: 'bobloblaw@lawblog.com',
+    sites: [],
+  },
+  personalIntro: 'I am a person who does things',
+  roles: {
+    frontend: 'I am a frontend developer',
+    backend: 'I am a backend developer',
+  },
 };

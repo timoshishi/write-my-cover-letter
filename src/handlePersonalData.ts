@@ -3,14 +3,14 @@ import { readPersonalization } from './readPersonalization';
 import { checkIfShouldUpdate } from './checkIfShouldUpdate';
 import { updatePersonalizedData } from './updateData/updateDataQuestions';
 import { applyDefaultPersonalizationData } from './applyDefaultPersonalData';
-import { readDefaultPersonalization } from './readPersonalization';
 import type { PersonalData } from './types';
+import { DEFAULT_PERSONALIZATION } from './constants';
 
 export const handlePersonalData = async (): Promise<PersonalData> => {
   const personalData = await readPersonalization();
   if (!personalData) throw new Error('No personal data found');
 
-  const defaultPersonalizationData = await readDefaultPersonalization();
+  const defaultPersonalizationData = DEFAULT_PERSONALIZATION;
   if (!defaultPersonalizationData) throw new Error('No default personalization data found');
 
   const { shouldUpdate } = await inquirer.prompt(checkIfShouldUpdate());
