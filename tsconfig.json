@@ -34,7 +34,6 @@
   "include": [
     "src/**/*",
     "cbPersonalization/**/*",
-    "scripts/createHeader.ts",
     "scripts/postBuild.ts",
     "scripts/**/*.ts",
     "index.ts"
