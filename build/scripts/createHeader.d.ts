@@ -1,1 +1,1 @@
-export declare const createHeader: () => Promise<string>;
+export declare const createHeader: () => string;

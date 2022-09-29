@@ -24,5 +24,7 @@ const rollupOptions = {
     json(),
   ],
 };
+
 process.env.NODE_ENV !== 'development' && rollupOptions.plugins.push(terser());
+
 export default rollupOptions;
