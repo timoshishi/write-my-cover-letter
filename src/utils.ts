@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import type { PersonalData } from '../types';
+import type { PersonalData } from './types';
 import fs from 'fs';
 import path from 'path';
 
@@ -19,5 +19,5 @@ export const writeJSONToDisk = async <T extends keyof PersonalData>(
   writePath: string
 ) => {
   const json = JSON.stringify(personalData);
-  fs.writeFileSync(path.resolve(writePath, `${key}.json`), json);
+  fs.writeFileSync(path.resolve(__dirname, '..', writePath, `${key}.json`), json);
 };

@@ -21,7 +21,6 @@ export const createHeader = (): string => {
     whitespaceBreak: true,
   });
   const header = chalk.blue(boxen(figText, boxenOptions));
-  console.log(header);
   return header;
 };
 
