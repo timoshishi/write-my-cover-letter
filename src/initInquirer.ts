@@ -14,13 +14,14 @@ const initInquirer = async () => {
     const personalData = await handlePersonalData();
 
     const { textResponses, outputTypes, createCopy } = await handleCoverLetterData(personalData);
-
+    console.log('BEFORE WRITE');
     await writeCoverLetter({ textResponses, outputTypes, createCopy, personalData });
-
+    console.log('WRITTEN');
     await handleComplete({
       personalDataUsed: personalData,
       keysPressed,
     });
+    console.log('DONE');
 
     return 'files written';
   } catch (err) {

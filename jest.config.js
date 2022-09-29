@@ -14,6 +14,10 @@ module.exports = {
       statements: 80,
     },
   },
+  transform: {
+    '.*\\.(tsx?|js)$': 'ts-jest',
+  },
+  transformIgnorePatterns: ['node_modules/(?!terminal-image)'],
   watchPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/', '<rootDir>/__mocks__/'],
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',

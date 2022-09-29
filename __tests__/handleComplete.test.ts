@@ -1,10 +1,17 @@
+import { jest } from '@jest/globals';
+// ts-
+jest.unstable_mockModule('terminal-image', () => ({
+  file: jest.fn(() => Promise.resolve('')),
+}));
+const terminalImage = import('terminal-image');
 import { handleComplete, getBrainType } from '../src/handleComplete';
 import * as createFooter from '../src/createFooter';
-import { PersonalData } from '../src/types';
+import { BrainTypes, PersonalData } from '../src/types';
 import { DEFAULT_PERSONALIZATION } from '../src/constants';
 import { createKeypressStream } from '../src/createKeypressStream';
-import readline from 'readline';
 import { stdin } from 'mock-stdin';
+
+jest.spyOn(createFooter, 'createFooter').mockImplementation((type: BrainTypes) => Promise.resolve(type));
 
 const keys = {
   up: '\x1B\x5B\x41',
@@ -12,8 +19,9 @@ const keys = {
   enter: '\x0D',
   space: '\x20',
 };
+// tslint:disable-next-line: no-console
 
-jest.spyOn(createFooter, 'createFooter').mockResolvedValue('galaxy');
+// mock the entire terminal
 
 let io;
 beforeAll(() => (io = stdin()));

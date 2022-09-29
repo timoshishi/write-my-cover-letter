@@ -36,7 +36,14 @@
     "cbPersonalization/**/*",
     "scripts/createHeader.ts",
     "scripts/postBuild.ts",
-    "scripts/**/*.ts"
+    "scripts/**/*.ts",
+    "index.ts"
   ] /* Specify the list of files to be included. */,
-  "exclude": ["**/types/*", "__mocks__", "__tests__/**/*"]
+  "exclude": ["**/types/*", "__mocks__", "__tests__/**/*"],
+  "ts-node": {
+    "esm": true
+  },
+  "ts-jest": {
+    "module": "esm"
+  }
 }
