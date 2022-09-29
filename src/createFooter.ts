@@ -1,61 +1,62 @@
 import terminalImage from 'terminal-image';
 import boxen, { Options as BoxenOptions } from 'boxen';
-import cfonts from 'cfonts';
-
-const GALAXY_PATH = 'assets/galaxy-brain.jpg';
-const HOT_PATH = 'assets/hot-brain.jpg';
-const WARM_PATH = 'assets/warm-brain.jpg';
+import path from 'path';
+import figlet from 'figlet';
+import pagga from 'figlet/importable-fonts/Pagga';
+import chalk from 'chalk';
 
 export const createFooter = async (type: 'warm' | 'hot' | 'galaxy') => {
-  try {
-    const imgPath = {
-      warm: WARM_PATH,
-      hot: HOT_PATH,
-      galaxy: GALAXY_PATH,
-    }[type];
+  const basePath = path.resolve(__dirname, '..', 'assets');
+  const HOT_PATH = path.join(basePath, 'hot-brain.jpg');
+  const WARM_PATH = path.join(basePath, 'warm-brain.jpg');
+  const GALAXY_PATH = path.join(basePath, 'galaxy-brain.jpg');
 
-    const memeText = {
-      warm: 'PERSONALIZING YOUR COVER LETTER',
-      hot: 'USING DEFAULT PERSONAL DATA',
-      galaxy: 'USING DEFAULTS AND|SPAMMING THE RETURN KEY',
-    }[type];
+  const imgPath = {
+    warm: WARM_PATH,
+    hot: HOT_PATH,
+    galaxy: GALAXY_PATH,
+  }[type];
+
+  const memeText = {
+    warm: 'PERSONALIZING YOUR COVER LETTER',
+    hot: 'USING DEFAULT PERSONAL DATA',
+    galaxy: 'USING DEFAULTS AND \nSPAMMING THE RETURN KEY',
+  }[type];
+
+  const boxenOptions: BoxenOptions = {
+    textAlignment: 'center',
+    align: 'center',
+    borderColor: 'black',
+    borderStyle: 'single',
+  };
+
+  try {
+    /* Setup font to print congrats message */
+    figlet.parseFont('Pagga', pagga);
+    const congrats = 'Noice!';
+    const padLength = Math.min(3, Math.floor(memeText.length / 2 - congrats.length));
+    const padded = ' '.repeat(padLength) + congrats + ' '.repeat(padLength);
+    const nicelyDone = figlet.textSync(padded, {
+      font: 'Pagga',
+    });
 
     const imageFile = await terminalImage.file(imgPath, {
-      height: '70%',
+      height: '50%',
     });
 
-    const boxenOptions: BoxenOptions = {
-      textAlignment: 'center',
-      // backgroundColor: 'white',
-      borderColor: 'black',
-      borderStyle: 'single',
-    };
+    /* log the meme */
+    console.log(
+      boxen(imageFile + memeText, {
+        ...boxenOptions,
+        backgroundColor: 'white',
+      })
+    );
 
-    const fontOptions = {
-      font: 'console', // console, block, simpleBlock, simple, 3d, simple3d, chrome, huge, shade, slick, grid, pallet, tiny
-      colors: ['black'], // define all colors
-      background: 'transparent', // define the background color, you can also use `backgroundColor` here as key
-      letterSpacing: 1, // define letter spacing
-      lineHeight: 0.2, // define the line height
-      space: false, // define if the output text should have empty lines on top and on the bottom
-      maxLength: 100, // define how many character can be on one line
-      gradient: false,
-      independentGradient: false, // define if you want to recalculate the gradient for each new line
-      transitionGradient: false, // define if this is a transition between colors directly
-      env: 'node',
-    };
+    /* log congratulatory message */
+    console.log(boxen(chalk.white(nicelyDone), { ...boxenOptions }));
 
-    const formattedMemeText = cfonts.render(memeText, fontOptions);
-    const coverLetterWritten = cfonts.render('COVER LETTER WRITTEN!', {
-      ...fontOptions,
-      font: 'chrome',
-      colors: ['green'],
-    });
-    console.log(boxen(imageFile + formattedMemeText.string, { ...boxenOptions, backgroundColor: 'white' }));
-    console.log(boxen(coverLetterWritten.string, { ...boxenOptions }));
     return type;
   } catch (error) {
     console.error(error);
   }
 };
-createFooter('warm');

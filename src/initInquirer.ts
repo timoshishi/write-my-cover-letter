@@ -1,4 +1,4 @@
-import { logHeader } from './logHeader';
+import { logHeader } from './createHeader';
 import { writeCoverLetter } from './writeDocs/writeCoverLetter';
 import { handlePersonalData } from './handlePersonalData';
 import { handleCoverLetterData } from './handleCoverLetterData';

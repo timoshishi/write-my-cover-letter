@@ -22,7 +22,9 @@ const rollupOptions = {
     }),
     commonjs(),
     json(),
-    terser(),
   ],
 };
+
+process.env.NODE_ENV !== 'development' && rollupOptions.plugins.push(terser());
+
 export default rollupOptions;
