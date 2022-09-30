@@ -11,10 +11,13 @@ const PERSONALIZATION_CHOICES = [
     name: 'personalization',
     message: 'Select an option to personalize',
     choices: [
+      { name: 'Go back', value: 'exit' },
       { name: 'Update your contact info', value: 'contactInfo' },
-      { name: 'Update personal intro', value: 'personalIntro' },
-      { name: 'Update a role with some information about a project you have completed', value: 'roles' },
-      { name: 'Go back to complete your cover letter', value: 'exit' },
+      { name: 'Update your personal introduction', value: 'personalIntro' },
+      {
+        name: 'Write a boilerplate description for a position',
+        value: 'roles',
+      },
     ],
   },
 ];

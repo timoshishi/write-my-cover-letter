@@ -6,7 +6,7 @@ export const checkIfShouldUpdate = async (): Promise<boolean> => {
     name: 'shouldUpdate',
     message: 'You can update your personal information! What would you like to do?',
     choices: [
-      { name: 'Use defaults', value: false, short: 'Skip' },
+      { name: 'Use defaults for any information I have not already provided', value: false, short: 'Use defaults' },
       { name: 'Update my personal data', value: true, short: 'Update' },
     ],
   });

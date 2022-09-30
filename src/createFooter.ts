@@ -52,13 +52,11 @@ export const createFooter = async (type: 'warm' | 'hot' | 'galaxy') => {
     });
 
     /* Create image string meme */
-    const imageFile = await terminalImage.file(imgPath, {
-      height: '70%',
-    });
+    const imageFile = await terminalImage.file(imgPath, {});
     const meme = boxen(imageFile + memeText, memeBoxOptions);
 
     /* Create final footer string */
-    const footer = chalk.blue(boxen(meme + '\n' + coverLetterFinishedText, footerBoxOptions));
+    const footer = chalk.blue(boxen(coverLetterFinishedText + '\n' + meme, footerBoxOptions));
 
     console.log(footer);
 

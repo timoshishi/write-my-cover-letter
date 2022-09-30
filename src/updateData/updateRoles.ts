@@ -16,12 +16,13 @@ export const createRole = async (): Promise<{ role: string; description: string 
     {
       type: 'input',
       name: 'newRole',
-      message: 'What is the name of the new role?',
+      message: 'What is the position type you will be applying for (e.g. "Front end developer")?',
     },
     {
       type: 'input',
       name: 'newRoleDescription',
-      message: 'What is the description of the new role?',
+      message:
+        'Provide a description about something you have done that makes you an amazing candidate for this position',
     },
   ]);
   return { role: newRole, description: newRoleDescription };
@@ -31,7 +32,7 @@ export const updateRole = async (role: string, description: string): Promise<Rol
   const { updatedDescription } = await inquirer.prompt({
     type: 'input',
     name: 'updatedDescription',
-    message: `What is the new description for ${role}?`,
+    message: `What is the updated description for ${role}?`,
     default: description,
   });
   return { [role]: updatedDescription };
@@ -44,7 +45,7 @@ export const updateRoles = async (roles): Promise<PersonalData['roles'] | void> 
     {
       type: 'list',
       name: 'roles',
-      message: 'Update an existing role or add a new one?',
+      message: 'Update an existing position description or add a new one?',
       choices: [
         {
           name: 'Add a new role',
