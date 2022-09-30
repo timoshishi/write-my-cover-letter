@@ -23,37 +23,44 @@ export const createFooter = async (type: 'warm' | 'hot' | 'galaxy') => {
     galaxy: 'USING DEFAULTS AND \nSPAMMING THE RETURN KEY',
   }[type];
 
-  const boxenOptions: BoxenOptions = {
+  const memeBoxOptions: BoxenOptions = {
     textAlignment: 'center',
     align: 'center',
     borderColor: 'black',
     borderStyle: 'single',
+    backgroundColor: 'white',
   };
+
+  const footerBoxOptions: BoxenOptions = {
+    borderStyle: 'double',
+    float: 'center',
+    align: 'center',
+    borderColor: 'yellow',
+    textAlignment: 'center',
+  };
+
+  /* construct the footer message */
+  const footerMessage = 'Noice!';
+  const padLength = Math.min(3, Math.floor(memeText.length / 2 - footerMessage.length));
+  const paddedMessage = ' '.repeat(padLength) + footerMessage + ' '.repeat(padLength);
 
   try {
     /* Setup font to print congrats message */
     figlet.parseFont('Pagga', pagga);
-    const congrats = 'Noice!';
-    const padLength = Math.min(3, Math.floor(memeText.length / 2 - congrats.length));
-    const padded = ' '.repeat(padLength) + congrats + ' '.repeat(padLength);
-    const nicelyDone = figlet.textSync(padded, {
+    const coverLetterFinishedText = figlet.textSync(paddedMessage, {
       font: 'Pagga',
     });
 
+    /* Create image string meme */
     const imageFile = await terminalImage.file(imgPath, {
-      height: '50%',
+      height: '70%',
     });
+    const meme = boxen(imageFile + memeText, memeBoxOptions);
 
-    /* log the meme */
-    console.log(
-      boxen(imageFile + memeText, {
-        ...boxenOptions,
-        backgroundColor: 'white',
-      })
-    );
+    /* Create final footer string */
+    const footer = chalk.blue(boxen(meme + '\n' + coverLetterFinishedText, footerBoxOptions));
 
-    /* log congratulatory message */
-    console.log(boxen(chalk.white(nicelyDone), { ...boxenOptions }));
+    console.log(footer);
 
     return type;
   } catch (error) {
