@@ -59,6 +59,5 @@
     "ts-loader": "^9.4.1",
     "tsx": "^3.9.0",
     "typescript": ">=4.4"
-  },
-  "dependencies": {}
+  }
 }

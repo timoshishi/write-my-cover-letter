@@ -56,7 +56,7 @@ export const addOrDeleteSites = async (sites: string[]): Promise<string[] | void
       {
         type: 'list',
         name: 'addOrDelete',
-        message: 'Would you like to delete a site?',
+        message: sites.length ? 'Would you like to add or delete a site?' : "Let's add a site!",
         choices: addOrDeleteChoices,
       },
     ]);

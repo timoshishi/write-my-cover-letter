@@ -1,7 +1,7 @@
 import { PersonalData } from './types';
 import { INDUSTRIES } from './constants';
 
-export const createCoverQuestions = (personalData: PersonalData) => {
+export const createCoverLetterQuestions = (personalData: PersonalData) => {
   return [
     {
       type: 'input',
@@ -39,7 +39,7 @@ export const createCoverQuestions = (personalData: PersonalData) => {
     {
       type: 'checkbox',
       name: 'outputTypes',
-      message: 'Select your types of output files',
+      message: 'Select your types of output files (pdf requires libreoffice)',
       choices: [
         { name: 'docx', checked: true },
         { name: 'pdf', checked: false },
