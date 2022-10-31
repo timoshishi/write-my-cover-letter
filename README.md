@@ -2,27 +2,27 @@
 
 ### [https://github.com/timoshishi/write-my-cover-letter](https://github.com/timoshishi/write-my-cover-letter)
 
-This is a script to aid writing personalized cover letters in .pdf or .docx format to your disk.
+This is a script to aid writing personalized cover letters in .docx or .pdf format to your disk.
+
+Notes:
+
+PDF format is currently only supported if libreoffice is installed locally.
+
+_You many need to make your terminal a little wider than usual to get the full experience._
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
-
-###
 
 ![](cover_letter.gif)
 
 ## Installation
 
-### Run it once
+#### Run it once
 
-```
-npx write-my-cover-letter
-```
+`npx write-my-cover-letter`
 
-### Install globally:
+#### Install globally
 
-```
-npm install -g write-my-cover-letter
-```
+`npm install -g write-my-cover-letter`
 
 - Run by typing `coverletter` in your terminal
 - Writes to your present working directory
@@ -31,20 +31,23 @@ npm install -g write-my-cover-letter
 
 Clone project from github
 
-`git clone https://github.com/timoshishi/write-my-cover-letter.git`
+1. `git clone https://github.com/timoshishi/write-my-cover-letter.git`
 
-- Install globally: `npm install -g ./` in base directory of project
+2. `cd write-my-cover-letter`
 
-  - Run by typing `coverletter` in your terminal
-  - Writes to your present working directory
+3. `yarn install`
 
-- Install locally: `npm install` in base directory of the project
-  - Run by typing `npm run coverletter` in project directory
-  - Writes to your present working directory
+There are several scripts that can be run from the project root directory but you are likely just served by running
+`yarn run build`. This is a development build made with rollup and will start the script in your terminal immediately.
 
-## Demo
+## Usage
 
-Insert gif or link to demo
+1. `coverletter` in your terminal will take you to a series of prompts.
+
+2. You can go with the defaults or enter your own values. Running with the defaults the first time may give you a feel
+   for the tone of the amazing cover letter you will be building.
+
+- If you want to go back to using the defaults you will need to reinstall the package.
 
 ## Structure of the Cover Letter
 
@@ -61,18 +64,25 @@ Insert gif or link to demo
 
 ## Running Tests
 
-To run tests, run the following command
+- `npm run test`
 
-```bash
-  npm run test
-```
+### Frequently Asked Questions that haven't been asked
 
-## FAQ
+**Q: Why is this a thing?**
 
-**Is this in any way useful to me?**
+**A**: I was tired of writing cover lett\*\*ers and wanted to automate the process.
 
-It is unlikely at this point as it is highly customized to my use case
+**Q: Do you use this?**
 
-**How can I personalize Write my Cover Letter for myself?**
+**A:** Definitely not. If I am interested in a company I will write a cover letter by hand.
 
-Altering the information contained in JSON files located at `/src/cvPersonalization`
+**Q: Is this going to help me get a job?**
+
+**A:** This is highly dependent on your skills and experience. This is a tool to help you write a cover letter that is
+personalized to the company you are applying to. It is not a magic bullet.
+
+**Q: How can I personalize Write my Cover Letter for myself?**
+
+**A:** You can fork the project and make changes to the text in the `src/constants/index.ts` files.
+
+**_Good luck!_**
