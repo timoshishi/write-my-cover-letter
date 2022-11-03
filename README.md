@@ -70,7 +70,7 @@ There are several scripts that can be run from the project root directory but yo
 
 **Q: Why is this a thing?**
 
-**A**: I was tired of writing cover lett\*\*ers and wanted to automate the process.
+**A**: I was tired of writing cover letters and wanted to make a fun little script to automate the process.
 
 **Q: Do you use this?**
 
